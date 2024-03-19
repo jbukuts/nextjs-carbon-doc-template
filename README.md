@@ -1,6 +1,6 @@
 # Carbon Next.js Documentation Template
 
-This is a site template built from Next.js and Carbon Design System that is intended to build a documentation-style site to static assets.
+This is a site template created with Next.js and Carbon Design System that is intended to build a documentation-style site as static assets.
 
 It is built using:
 
@@ -12,7 +12,7 @@ It is built using:
 
 ## Getting Started
 
-> This template requires a minumim of Node v18.17.0 be installed.
+> This template requires a minimum of Node v18.17.0 to be installed.
 
 First install dependencies via:
 
