@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 # Carbon Next.js Documentation Template
 
 This is a site template built from Next.js and Carbon Design System that is intended to build a documentation-style site to static assets.
