@@ -1,0 +1,44 @@
+{
+  "Index": {
+    "title": "Talleres de Venta Experiencial para Socios del Ecosistema IBM"
+  },
+  "UIShell": {
+    "Header": {
+      "menuButton": {
+        "open": "Navegación lateral abierta",
+        "close": "Cerrar navegación lateral"
+      },
+      "localeSwitcher": {
+        "label": "Seleccionar idioma"
+      },
+      "themeSwitcher": {
+        "label": "Cambiar el tema del sitio"
+      }
+    },
+    "SideNav": {
+      "label": "Navegación lateral"
+    }
+  },
+  "components": {
+    "QuizAlert": {
+      "defaultText": "Atención! Partes de esta sección estarán en el cuestionario."
+    },
+    "PageHeader": {
+      "scrollToTop": "Ir arriba",
+      "lastUpdated": "Última actualización {date}"
+    },
+    "Image": {},
+    "CodeBlock": {
+      "copyText": "Copiar código al portapapeles",
+      "copiedText": "¡Copiado!"
+    },
+    "TokenizationApplet": {
+      "inputLabel": "Texto de entrada",
+      "outputLabel": "Texto tokenizado",
+      "tokensTag": "{amount} tokens",
+      "wordsTag": "{amount} palabras",
+      "textToggle": "Mostrar texto",
+      "internalToggle": "Mostrar interno"
+    }
+  }
+}

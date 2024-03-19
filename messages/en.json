@@ -1,0 +1,44 @@
+{
+  "Index": {
+    "title": "Experiential Selling Workshops for IBM Ecosystem Partners"
+  },
+  "UIShell": {
+    "Header": {
+      "menuButton": {
+        "open": "Open side navigation",
+        "close": "Close side navigation"
+      },
+      "localeSwitcher": {
+        "label": "Change language"
+      },
+      "themeSwitcher": {
+        "label": "Toggle theme"
+      }
+    },
+    "SideNav": {
+      "label": "Side navigation"
+    }
+  },
+  "components": {
+    "QuizAlert": {
+      "defaultText": "Heads up! Parts of this section will be on the quiz."
+    },
+    "PageHeader": {
+      "scrollToTop": "Scroll to top",
+      "lastUpdated": "Last updated {date}"
+    },
+    "Image": {},
+    "CodeBlock": {
+      "copyText": "Copy code to clipboard",
+      "copiedText": "Copied!"
+    },
+    "TokenizationApplet": {
+      "inputLabel": "Input text",
+      "outputLabel": "Tokenized text",
+      "tokensTag": "{amount} tokens",
+      "wordsTag": "{amount} words",
+      "textToggle": "Show text",
+      "internalToggle": "Show internal"
+    }
+  }
+}
