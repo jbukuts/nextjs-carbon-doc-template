@@ -1,0 +1,13 @@
+
+.content {
+  min-height: calc(100vh - resources.$header-height);
+  max-width: 100%;
+  padding: 0;
+  margin-left: resources.$sidebar-width;
+}
+
+@include resources.apply-lesser-than('lg') {
+  .content {
+    margin-left: 0;
+  }
+}

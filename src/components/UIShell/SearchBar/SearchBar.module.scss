@@ -1,0 +1,8 @@
+.searchBar {
+  max-width: layout.to-rem(500px);
+  justify-content: flex-end;
+
+  &:global(.cds--search--expanded) input[role='searchbox'] {
+    padding-left: layout.$spacing-05 !important;
+  }
+}

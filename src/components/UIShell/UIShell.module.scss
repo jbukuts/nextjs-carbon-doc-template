@@ -1,0 +1,47 @@
+$indent: layout.$spacing-05;
+
+.sideBar {
+  border-right: 1px solid themes.$border-subtle-00;
+  background-color: themes.$layer-01;
+}
+
+.switcherItem {
+  margin: 0 !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerPanel {
+  padding-top: layout.$spacing-05;
+  height: min-content !important;
+  border-bottom: 1px solid themes.$border-subtle-00;
+}
+
+.headerButton {
+  @include resources.apply-greater-than('lg') {
+    display: none;
+  }
+}
+
+@for $i from 0 through 10 {
+  .col-#{$i} {
+    & > button > span {
+      padding-left: calc($i * $indent);
+    }
+
+    & > span {
+      padding-left: calc(max($i - 1, 0) * $indent);
+    }
+  }
+}
+
+.sideNavMenuItem {
+  & svg {
+    margin-right: layout.$spacing-03;
+    height: 100%;
+
+    & path {
+      height: 100%;
+    }
+  }
+}

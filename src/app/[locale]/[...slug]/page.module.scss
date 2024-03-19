@@ -1,0 +1,21 @@
+$margin: layout.$spacing-06;
+
+.page {
+  @include resources.repsonsive-content;
+}
+
+.article {
+  position: relative;
+
+  & > * {
+    margin-bottom: $margin;
+  }
+
+  & section > * {
+    margin-bottom: $margin;
+  }
+
+  & > *:nth-child(2) {
+    margin-top: $margin;
+  }
+}

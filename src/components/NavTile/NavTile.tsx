@@ -1,0 +1,68 @@
+import 'server-only';
+
+import { getLocale } from 'next-intl/server';
+import { SLUG_MAP } from '#/lib/velite';
+import { labs } from '#velite';
+import ClientNavTile from './ClientNavTile';
+
+interface NavTileProps {
+  /**
+   * locale agnostic slug to lab content
+   */
+  to: string;
+  /**
+   * Whether to not render description inside tile
+   */
+  blank?: boolean;
+  /**
+   * Content rendered within tag. Will replace description if used.
+   */
+  children?: React.ReactNode;
+  /**
+   * Whether children pages should be added to completion time tag
+   */
+  recursive?: boolean;
+}
+
+// TODO add recursive calcluation of time and date
+function getItem(slug: string, recursive: boolean) {
+  const item = SLUG_MAP[slug];
+
+  if (!item) {
+    throw Error(`item with slug ${slug} does not exist`);
+  }
+
+  const { title, timeToComplete, updated, toc_tree, desc } = item;
+
+  const totalTime = !recursive
+    ? timeToComplete
+    : labs
+        .filter((i) => i.slug.startsWith(slug))
+        .reduce((acc, { timeToComplete = 0 }) => acc + timeToComplete, 0);
+
+  return {
+    desc,
+    title: title || toc_tree[0].title,
+    timeToComplete: totalTime,
+    updated
+  };
+}
+
+export default async function NavTile(props: NavTileProps) {
+  const { to, children, blank = false, recursive = false } = props;
+  const locale = await getLocale();
+
+  const slug = `${locale}${to}`;
+  const { title, timeToComplete, updated, desc } = getItem(slug, recursive);
+  const content = blank ? null : children || (desc && <p>{desc}</p>);
+
+  return (
+    <ClientNavTile
+      to={`/${slug}`}
+      title={title!}
+      timeToComplete={timeToComplete}
+      updated={updated}>
+      {content}
+    </ClientNavTile>
+  );
+}

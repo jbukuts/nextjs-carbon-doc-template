@@ -1,0 +1,37 @@
+.inline {
+  font-size: 0.75em;
+  border: 1px solid themes.$border-subtle-02;
+  padding: layout.$spacing-01;
+  border-radius: 4px;
+  background-color: themes.$layer-01;
+}
+
+.multiline {
+  background-color: themes.$layer-01;
+  border: 1px solid themes.$border-subtle-02;
+
+  & .codeWrapper {
+    padding: layout.$spacing-04;
+    overflow-x: auto;
+    max-height: 250px;
+
+    & code {
+      font-size: 0.875em;
+    }
+  }
+  
+  & .panel {
+    display: flex;
+    border-top: 1px solid themes.$border-subtle-02;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .lang {
+    padding-left: layout.$spacing-04;
+    @include type.type-style('code-01');
+  }
+}
+
+

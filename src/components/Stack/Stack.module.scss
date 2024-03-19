@@ -1,0 +1,32 @@
+.stack {
+  display: flex;
+  gap: var(--cds-stack-gap)
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.justify {
+  $options: 'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly';
+
+  @each $option in $options {
+    &.justify-#{$option} {
+      justify-content: #{$option};
+    }
+  }
+}
+
+.align {
+  $options: 'flex-start', 'flex-end', 'center', 'stretch';
+
+  @each $option in $options {
+    &.align-#{$option} {
+      align-items: #{$option};
+    }
+  }
+}

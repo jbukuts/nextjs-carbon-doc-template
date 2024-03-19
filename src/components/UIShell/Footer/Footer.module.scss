@@ -1,0 +1,4 @@
+.footer {
+  @include resources.repsonsive-content(layout.$spacing-06);
+  border-top: 1px solid themes.$border-subtle-00;
+}

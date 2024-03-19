@@ -1,0 +1,74 @@
+@use '@carbon/layout';
+
+@mixin apply-lesser-than($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: inspect(map-get($breakpoints, $breakpoint))) {
+      @content;
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin apply-greater-than($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: inspect(map-get($breakpoints, $breakpoint))) {
+      @content;
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+$def-padding: layout.$spacing-07;
+$small-padding: layout.$spacing-05;
+$large-padding: layout.$spacing-12;
+
+@mixin repsonsive-content($vert-padding: 0) {
+  padding: $vert-padding $def-padding;
+
+  @include apply-lesser-than('md') {
+    padding: $vert-padding $small-padding;
+  }
+
+  @include apply-greater-than('xl') {
+    padding: $vert-padding $large-padding;
+  }
+}
+
+// useful is cases where item within content wrapper needs to break out of padding 
+// but intenal items still want to be inline
+@mixin content-breakout {
+  width: calc(100% + 2 * $def-padding) !important;
+  left: calc(-1 * $def-padding);
+  position: relative;
+
+  @include apply-lesser-than('md') {
+    width: calc(100% + 2 * $small-padding) !important;
+    left: calc(-1 * $small-padding);
+  }
+
+  @include apply-greater-than('xl') {
+    width: calc(100% + 2 * $large-padding) !important;
+    left: calc(-1 * $large-padding);
+  }
+}
+
+
+@mixin center-fixed-horizontal {
+  left: 50%;
+  translate: -50% 0;
+}
+
+@mixin center-fixed-vertical {
+  top: 50%;
+  translate: -50% 0;
+}
+
+@mixin center-fixed {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
