@@ -114,7 +114,7 @@ export default function UIShell(props: UIShellProps) {
       attribute='class'
       value={{ light: 'cds--white', dark: 'cds--g100' }}
       themes={['light', 'dark']}>
-      <Header aria-label='IBM VEST' className={styles.header}>
+      <Header className={styles.header}>
         <HeaderMenuButton
           className={styles.headerButton}
           aria-label={t(`Header.menuButton.${showSideNav ? 'close' : 'open'}`)}
@@ -123,7 +123,7 @@ export default function UIShell(props: UIShellProps) {
           onClick={toggleSideBar}
           aria-expanded={showSideNav}
         />
-        <HeaderName prefix='IBM'>VAD VAR Reborn</HeaderName>
+        <HeaderName prefix='Carbon'>Next.js Template</HeaderName>
         <HeaderGlobalBar>
           <SearchBar />
 
