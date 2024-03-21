@@ -24,7 +24,7 @@
 
 $def-padding: layout.$spacing-07;
 $small-padding: layout.$spacing-05;
-$large-padding: layout.$spacing-12;
+$large-padding: 10vw;
 
 @mixin repsonsive-content($vert-padding: 0) {
   padding: $vert-padding $def-padding;
