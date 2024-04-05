@@ -20,6 +20,11 @@ export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+/**
+ * Sourced from next-int static example
+ *
+ * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router#static-rendering
+ */
 export default function LocaleLayout({
   children,
   params: { locale }
@@ -29,8 +34,8 @@ export default function LocaleLayout({
   const messages = useMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang={locale}>
+      <body>
         <NextIntlClientProvider messages={pick(messages, 'UIShell')}>
           <UIShell sideBarTree={SLUG_TREE}>{children}</UIShell>
         </NextIntlClientProvider>

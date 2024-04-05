@@ -59,7 +59,10 @@ export default function Header(props: HeaderProps) {
           orientation='horizontal'
           align='center'
           justify='space-between'>
-          <a title='Scroll to top' href='#'>
+          <a
+            className={styles.staticHeaderTitle}
+            title='Scroll to top'
+            href='#'>
             {children}
           </a>
           {tagStack}

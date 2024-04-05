@@ -1,11 +1,7 @@
+import { DEF_LOCALE } from '#/i18n';
+
 const ABSOLUTE_URL_REGEX = new RegExp('^(?:[a-z+]+:)?//', 'i');
 const URI_URL_REGEX = new RegExp('^([a-z]+:)(?!//)', 'i');
-
-/**
- * @constant
- * @default
- */
-const DEF_LOC = 'en';
 
 /**
  * determines if input URL is relative
@@ -30,7 +26,7 @@ const isURLRelative = (url: string): boolean => !isURLAbsolute(url);
  * @param {string} name
  * @param {string=} defLocale
  *
- *@example <caption>Locale in name</caption>
+ * @example <caption>Locale in name</caption>
  * // returns `es`
  * parseLocaleFromFileName('path/to/file/test.es')
  *
@@ -39,7 +35,10 @@ const isURLRelative = (url: string): boolean => !isURLAbsolute(url);
  * parseLocaleFromFileName('path/to/file/test')
  *
  */
-const parseLocaleFromFileName = (name: string, defLocale: string = DEF_LOC) => {
+const parseLocaleFromFileName = (
+  name: string,
+  defLocale: string = DEF_LOCALE
+) => {
   // extract locale from file name
   const splitName = name.split('.');
   if (splitName.length === 1) splitName.push(defLocale);
@@ -63,7 +62,10 @@ const parseLocaleFromFileName = (name: string, defLocale: string = DEF_LOC) => {
  * parseLocaleFromFileName('test')
  *
  */
-const parseLocaleFromFilePath = (path: string, defLocale: string = DEF_LOC) => {
+const parseLocaleFromFilePath = (
+  path: string,
+  defLocale: string = DEF_LOCALE
+) => {
   const splitPath = path.split('/');
   const fileName = splitPath.pop();
 
@@ -96,7 +98,7 @@ const toHoursAndMinutes = (totalMinutes: number) => {
   const formattedHours = hours > 0 ? `${hours} hr${hours > 1 ? 's' : ''}` : ``;
   const formattedMin = minutes > 0 ? `${minutes} min` : '';
 
-  return `${formattedHours} ${formattedMin}`;
+  return `${formattedHours} ${formattedMin}`.trim();
 };
 
 export {

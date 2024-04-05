@@ -114,7 +114,7 @@ export default function UIShell(props: UIShellProps) {
       attribute='class'
       value={{ light: 'cds--white', dark: 'cds--g100' }}
       themes={['light', 'dark']}>
-      <Header className={styles.header}>
+      <Header className={styles.header} aria-label='header'>
         <HeaderMenuButton
           className={styles.headerButton}
           aria-label={t(`Header.menuButton.${showSideNav ? 'close' : 'open'}`)}
@@ -125,8 +125,8 @@ export default function UIShell(props: UIShellProps) {
         />
         <HeaderName prefix='Carbon'>Next.js Template</HeaderName>
         <HeaderGlobalBar>
+          {/* TODO: Add search function */}
           <SearchBar />
-
           <ToggleThemeAction />
           <HeaderGlobalAction
             isActive={localeOpen}

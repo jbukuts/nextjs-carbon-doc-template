@@ -8,6 +8,10 @@ timeToComplete: 10
 
 Localization logic for the site is handled via [`next-intl`](https://next-intl-docs.vercel.app/).
 
+Because this site is designed to build of to static assets some special care has been taken to use the proper methods from `next-intl`. Here's some important documentation on the topic:
+
+If this site is to instead be changed to be hosted with a server instead you can forgoe the.
+
 ## Static routes
 
 As stated [elswhere](/docs/content-sourcing#localization), translations for long-form content is stored as seperate files alongside each other. Each file is then transformed into a static page with a locale prefixed.

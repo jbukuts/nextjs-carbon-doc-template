@@ -3,6 +3,8 @@ import { getRequestConfig } from 'next-intl/server';
 
 export type Locale = 'en' | 'es';
 
+export const DEF_LOCALE: Locale = 'en';
+
 // Can be imported from a shared config
 export const locales: Locale[] = ['en', 'es'];
 

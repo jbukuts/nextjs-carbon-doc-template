@@ -2,8 +2,9 @@ import remarkPresetLintConsistent from 'remark-preset-lint-consistent'
 import remarkPresetLintRecommended from 'remark-preset-lint-recommended'
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkLintFrontmatterSchema from 'remark-lint-frontmatter-schema';
+import mdxConfig from './mdx.config.mjs'
 
-import schema from './frontmatter.schema.mjs'
+const { frontmatterSchema } = mdxConfig;
 
 const config = {
   settings: {},
@@ -23,7 +24,7 @@ const config = {
     ["remark-lint-list-item-indent", [2, 'space']],
     // ["remark-lint-list-item-spacing", ["error"]],
     remarkFrontmatter,
-    [remarkLintFrontmatterSchema, ['error', { embed: schema }]],
+    [remarkLintFrontmatterSchema, ['error', { embed: frontmatterSchema }]],
   ]
 }
 

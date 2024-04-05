@@ -4,7 +4,7 @@ import type { Metadata, ResolvingMetadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import { PageHeader, PageNavFooter } from '#/components';
+import { PageHeader } from '#/components';
 import shortcodes from '#/lib/mdx/shortcodes';
 import { remarkImage, remarkLocalizeLinks } from '#/lib/plugins/remark';
 import { SLUG_MAP, collectBreadcrumbs } from '#/lib/velite';
@@ -118,9 +118,15 @@ export default async function LabPage(props: PageProps) {
 
   unstable_setRequestLocale(locale);
 
-  const compiled = await compileContent([locale, ...slug].join('/'));
-  const { content, toc, frontmatter, breadcrumbs } = compiled;
+  const { content, toc, frontmatter, breadcrumbs } = await compileContent(
+    [locale, ...slug].join('/')
+  );
 
+  /**
+   * Supply localized text to client components
+   *
+   * @see https://next-intl-docs.vercel.app/docs/environments/server-client-components#option-3-providing-individual-messages
+   */
   const messages = await getMessages();
 
   return (
@@ -132,7 +138,8 @@ export default async function LabPage(props: PageProps) {
           </PageHeader>
           {content}
         </article>
-        <PageNavFooter />
+        {/** TODO: Implement next/prev logic */}
+        {/* <PageNavFooter /> */}
       </div>
     </NextIntlClientProvider>
   );

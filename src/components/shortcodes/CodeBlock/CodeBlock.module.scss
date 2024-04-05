@@ -28,6 +28,10 @@
     align-items: center;
   }
 
+  & .copyButton {
+    border-left: 1px solid themes.$border-subtle-02;
+  }
+
   & .lang {
     padding-left: layout.$spacing-04;
     @include type.type-style('code-01');

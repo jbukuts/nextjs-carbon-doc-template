@@ -13,61 +13,62 @@ import {
   TableRow,
   UnorderedList,
   OrderedList,
-  ListItem
+  ListItem,
+  BlockQuote,
+  SmartLink,
+  CodeBlock,
+  Image,
+  Table,
+  QuizAlert,
+  Warning,
+  Danger
 } from '#/components/shortcodes';
 import Headings from '#/components/shortcodes/Heading';
 import TileGrid from '#/components/TileGrid';
 
+type ComponentMap = MDXRemoteProps['components'];
 type ShortCode = keyof typeof import('#/components/shortcodes');
+
 const LazyShortCode = (code: ShortCode) =>
   dynamic<any>(() =>
     import('#/components/shortcodes/index').then((mod) => mod[code])
   );
 
-const tableShortCodes: MDXRemoteProps['components'] = {
-  table: LazyShortCode('Table'),
-  thead: TableHead,
-  tbody: TableBody,
-  th: TableHeadData,
-  td: TableData,
-  tr: TableRow
+const customComponents: ComponentMap = {
+  QuizAlert: QuizAlert,
+  Warning: Warning,
+  Danger: Danger,
+  TokenizationApplet: LazyShortCode('TokenizationApplet'),
+  NavTile: NavTile,
+  WatsonxResources: () =>
+    createElement(FragmentLoader, { name: 'watsonx-resources' }),
+  TileGrid: TileGrid
 };
 
-const listShortcodes: MDXRemoteProps['components'] = {
-  ul: UnorderedList,
-  ol: OrderedList,
-  li: ListItem
-};
-
-const headingShortcodes: MDXRemoteProps['components'] = {
+const shortcodes: ComponentMap = {
+  blockquote: BlockQuote,
+  a: SmartLink,
+  code: CodeBlock,
+  img: Image,
+  // heading elements
   h1: () => null,
   h2: Headings[2],
   h3: Headings[3],
   h4: Headings[4],
   h5: Headings[5],
-  h6: Headings[6]
-};
-
-const calloutShortCodes: MDXRemoteProps['components'] = {
-  QuizAlert: LazyShortCode('QuizAlert'),
-  Warning: LazyShortCode('Warning'),
-  Danger: LazyShortCode('Danger'),
-  blockquote: LazyShortCode('BlockQuote')
-};
-
-const shortcodes: MDXRemoteProps['components'] = {
-  a: LazyShortCode('SmartLink'),
-  code: LazyShortCode('CodeBlock'),
-  img: LazyShortCode('Image'),
-  TokenizationApplet: LazyShortCode('TokenizationApplet'),
-  TileGrid: TileGrid,
-  NavTile: NavTile,
-  WatsonxResources: () =>
-    createElement(FragmentLoader, { name: 'watsonx-resources' }),
-  ...calloutShortCodes,
-  ...headingShortcodes,
-  ...tableShortCodes,
-  ...listShortcodes
+  h6: Headings[6],
+  // list elements
+  ul: UnorderedList,
+  ol: OrderedList,
+  li: ListItem,
+  // table elements
+  table: Table,
+  thead: TableHead,
+  tbody: TableBody,
+  th: TableHeadData,
+  td: TableData,
+  tr: TableRow,
+  ...customComponents
 };
 
 export default shortcodes;

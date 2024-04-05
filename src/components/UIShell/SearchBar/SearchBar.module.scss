@@ -1,8 +1,64 @@
+.searchWrapper {
+  position: relative;
+  width: layout.to-rem(500px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .searchBar {
-  max-width: layout.to-rem(500px);
-  justify-content: flex-end;
+  
+  // justify-content: flex-end;
 
   &:global(.cds--search--expanded) input[role='searchbox'] {
-    padding-left: layout.$spacing-05 !important;
+    padding-left: layout.$spacing-09 !important;
+    padding-right: 0 !important;
+  }
+
+  & > :global(.cds--search-magnifier) {
+    left: 0 !important;
+  }
+}
+
+.resultsWrapper {
+  position: absolute;
+  top: 100%;
+  max-height: min(100vh, layout.to-rem(600px));
+  overflow-y: auto;
+  width: 100%;
+
+  background-color: themes.$layer-01;
+  border: 1px solid themes.$border-subtle-00;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.resultsAmount {
+  padding: layout.$spacing-04;
+  background-color: themes.$layer-03;
+  border-bottom: 1px solid themes.$border-subtle-00;
+}
+
+.searchResult {
+  text-decoration: none;
+  color: initial;
+  padding: layout.$spacing-04;
+  transition: background-color 100ms linear;
+  user-select: none;
+
+  & .resultTitle {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: layout.$spacing-03;
+    justify-content: flex-start;
+    align-items: center;
+    // margin-bottom: layout.$spacing-04;
+  }
+
+  &:hover {
+    background-color: themes.$layer-02;
+    cursor: pointer;
   }
 }

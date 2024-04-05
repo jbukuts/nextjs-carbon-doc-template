@@ -1,35 +1,40 @@
-@use '@carbon/colors' as *;
+@use '@carbon/themes' as themes;
+
+// TODO: better theming, give access to namespaces
+@function token-color($c) {
+  @return var(#{'--cds-tag-color-#{$c}'});
+}
 
 .hljs-keyword,
 .hljs-literal,
 .hljs-symbol,
 .hljs-name {
-  color: $blue-60;
+  color: token-color('purple');
 }
 
 .hljs-link {
-  color: $blue-50;
+  color: token-color('blue');
   text-decoration: underline;
 }
 
 .hljs-built_in,
 .hljs-type {
-  color: $teal-60;
+  color: token-color('teal');
 }
 
 .hljs-number,
 .hljs-class {
-  color: $green-80;
+  color: token-color('green');
 }
 
 .hljs-string,
 .hljs-meta .hljs-string {
-  color: $orange-60;
+  color: token-color('red');
 }
 
 .hljs-regexp,
 .hljs-template-tag {
-  color: $orange-80;
+  color: token-color('red');
 }
 
 .hljs-subst,
@@ -37,37 +42,37 @@
 .hljs-title,
 .hljs-params,
 .hljs-formula {
-  color: $gray-70;
+  color: token-color('gray');
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: $green-60;
+  color: token-color('gray');
   font-style: italic;
 }
 
 .hljs-doctag {
-  color: $green-80;
+  color: token-color('green');
 }
 
 .hljs-meta,
 .hljs-meta .hljs-keyword,
 .hljs-tag {
-  color: $gray-60;
+  color: token-color('gray');
 }
 
 .hljs-variable,
 .hljs-template-variable {
-  color: $purple-60;
+  color: token-color('purple');
 }
 
 .hljs-attr,
 .hljs-attribute {
-  color: $blue-70;
+  color: token-color('blue');
 }
 
 .hljs-section {
-  color: $yellow-60;
+  color: token-color('magenta');
 }
 
 .hljs-emphasis {
@@ -88,17 +93,17 @@
 .hljs-selector-class,
 .hljs-selector-attr,
 .hljs-selector-pseudo {
-  color: #d7ba7d;
+  color: token-color('magenta');
 }
 
 .hljs-addition {
-  background-color: $green-80;
+  background-color: token-color('green');;
   display: inline-block;
   width: 100%;
 }
 
 .hljs-deletion {
-  background-color: $red-80;
+  background-color: token-color('red');
   display: inline-block;
   width: 100%;
 }

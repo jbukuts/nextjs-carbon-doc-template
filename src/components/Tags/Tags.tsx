@@ -26,13 +26,13 @@ const LEVEL_MAP: Record<ContentLevel, TagProps['type']> = {
 };
 
 export function UpdatedTag(props: UpdatedTagProps) {
-  const { updated, type = DEF_TAG_TYPE } = props;
+  const { updated, type = DEF_TAG_TYPE, ...rest } = props;
 
   const t = useTranslations('components.PageHeader');
   const formatter = useFormatter();
 
   return (
-    <Tag renderIcon={Calendar} type={type}>
+    <Tag {...rest} renderIcon={Calendar} type={type}>
       {t('lastUpdated', {
         date: formatter.dateTime(new Date(updated), {
           year: 'numeric',
@@ -45,21 +45,21 @@ export function UpdatedTag(props: UpdatedTagProps) {
 }
 
 export function ReadingTimeTag(props: ReadingTimeTagProps) {
-  const { timeToComplete, type = DEF_TAG_TYPE } = props;
+  const { timeToComplete, type = DEF_TAG_TYPE, ...rest } = props;
 
   return (
-    <Tag renderIcon={Timer} type={type}>
+    <Tag {...rest} renderIcon={Timer} type={type}>
       {toHoursAndMinutes(timeToComplete)}
     </Tag>
   );
 }
 
 export function ContentLevelTag(props: ContentLevelTagProps) {
-  const { level } = props;
+  const { level, ...rest } = props;
 
   const type = LEVEL_MAP[level] || 'magenta';
   return (
-    <Tag type={type} renderIcon={Apple}>
+    <Tag {...rest} type={type} renderIcon={Apple}>
       {level}
     </Tag>
   );

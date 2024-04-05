@@ -2,7 +2,8 @@
 
 import { IconButton as CopyButton } from '@carbon/react';
 import { Copy } from '@carbon/react/icons';
-import { Children } from 'react';
+import { useCopyToClipboard } from '@uidotdev/usehooks';
+import { Children, createElement, useRef } from 'react';
 import styles from './CodeBlock.module.scss';
 import './highlight.scss';
 
@@ -18,23 +19,49 @@ export default function CodeBlock(props: CodeBlockProps) {
   const lang = className
     ?.split(' ')
     .filter((c) => CODE_CLASS_REGEX.test(c))
-    .map((i) => i.split('-').slice(1).join('-'));
+    .map((i) => i.split('-').slice(1).join('-'))
+    .join(' ');
 
-  return isInline ? (
-    <code className={styles.inline}>{children}</code>
-  ) : (
+  return createElement(
+    isInline ? InlineCodeBlock : MultiLineCodeBlock,
+    { codeLang: lang || '' },
+    children
+  );
+}
+
+/**
+ * Code block fragments used inside other text element
+ */
+function InlineCodeBlock(props: CodeBlockProps) {
+  const { children } = props;
+  return <code className={styles.inline}>{children}</code>;
+}
+
+/**
+ * Multiline code block for copying with syntax highlighting
+ */
+function MultiLineCodeBlock(props: CodeBlockProps & { codeLang: string }) {
+  const { children, codeLang } = props;
+  const [_copiedText, copyToClipboard] = useCopyToClipboard();
+  const codeRef = useRef<HTMLElement>(null);
+
+  const copyCode = () =>
+    codeRef.current && copyToClipboard(codeRef.current.textContent!);
+
+  return (
     <div className={styles.multiline}>
       <div className={styles.codeWrapper}>
-        <code>{children}</code>
+        <code ref={codeRef}>{children}</code>
       </div>
       <div className={styles.panel}>
-        <span className={styles.lang}>{lang}</span>
+        <span className={styles.lang}>{codeLang}</span>
         <CopyButton
-          style={{ borderLeft: '1px solid var(--cds-border-subtle-02)' }}
+          className={styles.copyButton}
           size='md'
           kind='ghost'
           align='bottom-right'
-          label='Copy code to clipboad'>
+          label={'Copy code to clipboad'}
+          onClick={copyCode}>
           <Copy />
         </CopyButton>
       </div>
