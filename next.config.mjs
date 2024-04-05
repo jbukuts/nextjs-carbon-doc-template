@@ -1,37 +1,36 @@
-import fs from 'fs';
+// import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const SYMLINKS = ['content', 'fragments'];
-const IS_DEV = process.env.NODE_ENV === 'development';
+// const SYMLINKS = ['content', 'fragments'];
+// const IS_DEV = process.env.NODE_ENV === 'development';
 
 // symlink logic
-if (IS_DEV) {
-  SYMLINKS.forEach((s) => {
-    const target = path.join(__dirname, 'public', s);
-    if (!fs.existsSync(target)) {
-      console.log('creating symlink:', s);
-      const source = path.join(__dirname, s);
-      fs.symlinkSync(source, target, 'dir');
-    }
-  });
-} else {
-  SYMLINKS.forEach((s) => {
-    const target = path.join(__dirname, 'public', s);
-    if (fs.existsSync(target)) {
-      console.log('removing symlink:', s);
-      fs.unlinkSync(target);
-    }
-  });
-}
+// if (IS_DEV) {
+//   SYMLINKS.forEach((s) => {
+//     const target = path.join(__dirname, 'public', s);
+//     if (!fs.existsSync(target)) {
+//       console.log('creating symlink:', s);
+//       const source = path.join(__dirname, s);
+//       fs.symlinkSync(source, target, 'dir');
+//     }
+//   });
+// } else {
+//   SYMLINKS.forEach((s) => {
+//     const target = path.join(__dirname, 'public', s);
+//     if (fs.existsSync(target)) {
+//       console.log('removing symlink:', s);
+//       fs.unlinkSync(target);
+//     }
+//   });
+// }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: `/nextjs-carbon-doc-template`,
   experimental: {
     outputFileTracingExcludes: {
       '*': ['./public/content/**/*', './content/**/*']
