@@ -2,7 +2,6 @@ import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import createNextIntlPlugin from 'next-intl/plugin';
-import * as packageJSON from './package.json' assert { type: 'json' };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -32,7 +31,7 @@ if (IS_DEV) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: `/${packageJSON.name}`,
+  basePath: `/nextjs-carbon-doc-template`,
   experimental: {
     outputFileTracingExcludes: {
       '*': ['./public/content/**/*', './content/**/*']
