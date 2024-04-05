@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const withNextIntl = createNextIntlPlugin();
 
 // const SYMLINKS = ['content', 'fragments'];
 // const IS_DEV = process.env.NODE_ENV === 'development';
@@ -29,7 +30,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // }
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withNextIntl({
   output: 'export',
   experimental: {
     outputFileTracingExcludes: {
@@ -79,8 +80,6 @@ const nextConfig = {
       }
     }
   }
-};
+});
 
-const withNextIntl = createNextIntlPlugin();
-
-export default withNextIntl(nextConfig);
+export default nextConfig;
