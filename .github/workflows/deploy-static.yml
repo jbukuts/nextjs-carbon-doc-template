@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  VERCEL_URL: jbukuts.github.io
+  VERCEL_URL: jbukuts.github.io/nextjs-carbon-doc-template
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
