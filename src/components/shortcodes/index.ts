@@ -1,9 +1,10 @@
 import BlockQuote from './BlockQuote';
 import callouts from './Callouts';
 import CodeBlock from './CodeBlock';
+import Heading from './Heading';
 import Image from './Image';
+import Link from './Link';
 import ListItem, { OrderedList, UnorderedList } from './List';
-import SmartLink from './SmartLink';
 import Table, {
   TableRow,
   TableBody,
@@ -11,12 +12,10 @@ import Table, {
   TableHead,
   TableHeadData
 } from './Table';
-import TokenizationApplet from './TokenizationApplet';
 
 const { QuizAlert, Danger, Warning } = callouts;
 
 export {
-  TokenizationApplet,
   Image,
   CodeBlock,
   ListItem,
@@ -27,10 +26,11 @@ export {
   QuizAlert,
   Danger,
   Warning,
-  SmartLink,
+  Link,
   TableRow,
   TableBody,
   TableData,
   TableHead,
-  TableHeadData
+  TableHeadData,
+  Heading
 };

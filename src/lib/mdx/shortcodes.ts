@@ -3,8 +3,7 @@ import 'server-only';
 import dynamic from 'next/dynamic';
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { createElement } from 'react';
-import FragmentLoader from '#/components/FragmentLoader';
-import NavTile from '#/components/NavTile';
+import { NavTile, TileGrid, FragmentLoader } from '#/components/custom';
 import {
   TableHead,
   TableBody,
@@ -15,48 +14,36 @@ import {
   OrderedList,
   ListItem,
   BlockQuote,
-  SmartLink,
+  Link,
   CodeBlock,
   Image,
   Table,
   QuizAlert,
   Warning,
-  Danger
+  Danger,
+  Heading
 } from '#/components/shortcodes';
-import Headings from '#/components/shortcodes/Heading';
-import TileGrid from '#/components/TileGrid';
 
 type ComponentMap = MDXRemoteProps['components'];
-type ShortCode = keyof typeof import('#/components/shortcodes');
+type CustomComp = keyof typeof import('#/components/custom');
 
-const LazyShortCode = (code: ShortCode) =>
+const LazyComp = (code: CustomComp) =>
   dynamic<any>(() =>
-    import('#/components/shortcodes/index').then((mod) => mod[code])
+    import('#/components/custom/index').then((mod) => mod[code])
   );
-
-const customComponents: ComponentMap = {
-  QuizAlert: QuizAlert,
-  Warning: Warning,
-  Danger: Danger,
-  TokenizationApplet: LazyShortCode('TokenizationApplet'),
-  NavTile: NavTile,
-  WatsonxResources: () =>
-    createElement(FragmentLoader, { name: 'watsonx-resources' }),
-  TileGrid: TileGrid
-};
 
 const shortcodes: ComponentMap = {
   blockquote: BlockQuote,
-  a: SmartLink,
+  a: Link,
   code: CodeBlock,
   img: Image,
   // heading elements
-  h1: () => null,
-  h2: Headings[2],
-  h3: Headings[3],
-  h4: Headings[4],
-  h5: Headings[5],
-  h6: Headings[6],
+  h1: Heading.H1,
+  h2: Heading.H2,
+  h3: Heading.H3,
+  h4: Heading.H4,
+  h5: Heading.H5,
+  h6: Heading.H6,
   // list elements
   ul: UnorderedList,
   ol: OrderedList,
@@ -68,7 +55,15 @@ const shortcodes: ComponentMap = {
   th: TableHeadData,
   td: TableData,
   tr: TableRow,
-  ...customComponents
+  // custom elements
+  QuizAlert: QuizAlert,
+  Warning: Warning,
+  Danger: Danger,
+  TokenizationApplet: LazyComp('TokenizationApplet'),
+  NavTile: NavTile,
+  TileGrid: TileGrid,
+  WatsonxResources: () =>
+    createElement(FragmentLoader, { name: 'fragment-test' })
 };
 
 export default shortcodes;

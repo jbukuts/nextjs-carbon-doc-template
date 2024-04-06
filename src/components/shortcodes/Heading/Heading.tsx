@@ -1,7 +1,7 @@
 import { FC, createElement } from 'react';
 import styles from './Heading.module.scss';
 
-const LEVELS = [1, 2, 3, 4, 5, 6] as const;
+const LEVELS = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'] as const;
 
 interface HeadingProps extends React.ComponentProps<'h1'> {
   level: (typeof LEVELS)[number];
@@ -10,7 +10,7 @@ interface HeadingProps extends React.ComponentProps<'h1'> {
 function Heading(props: HeadingProps) {
   const { level, children, ...rest } = props;
   return createElement(
-    `h${level}`,
+    level.toLowerCase(),
     { ...rest, className: styles.heading },
     children
   );

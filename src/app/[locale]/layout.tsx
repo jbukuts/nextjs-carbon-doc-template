@@ -2,7 +2,7 @@ import pick from 'lodash/pick';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { ReactNode } from 'react';
-import UIShell from '#/components/UIShell';
+import UIShell from '#/components/ui/UIShell';
 import { locales, type Locale } from '#/i18n';
 import { SLUG_TREE } from '#/lib/velite';
 

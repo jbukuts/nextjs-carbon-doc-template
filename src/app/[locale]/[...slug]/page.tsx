@@ -1,17 +1,12 @@
-import path from 'path';
 import pick from 'lodash/pick';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
-import { compileMDX } from 'next-mdx-remote/rsc';
-import { PageHeader } from '#/components';
-import shortcodes from '#/lib/mdx/shortcodes';
-import { remarkImage, remarkLocalizeLinks } from '#/lib/plugins/remark';
-import { SLUG_MAP, collectBreadcrumbs } from '#/lib/velite';
-import mdxConfig from '#mdx-config';
+import { PageHeader } from '#/components/ui';
+import compileContent from '#/lib/mdx/compile-content';
+import { SLUG_MAP } from '#/lib/velite';
+import { generateMergedMetadata } from '#/shared-metadata';
 import styles from './page.module.scss';
-
-const { remarkPlugins, rehypePlugins } = mdxConfig;
 
 type Slug = { slug: string[]; locale: string };
 
@@ -48,67 +43,27 @@ export async function generateMetadata(
   } = props;
 
   const fullSlug = [locale, ...slug].join('/');
-  const { title, toc_tree } = SLUG_MAP[fullSlug];
+  const { title: t, toc_tree, updated, excerpt, desc } = SLUG_MAP[fullSlug];
 
-  return { title: title || toc_tree[0].title || undefined };
-}
+  const title = t || toc_tree[0].title || undefined;
+  const description = desc ? desc : excerpt;
 
-/**
- * Compiles raw MDX string to final rendered element
- *
- * @param {string} slug page to render
- * @returns compiled content and metadata
- */
-async function compileContent(slug: string) {
-  const item = SLUG_MAP[slug];
-
-  if (!item) {
-    throw new Error(`${slug} does not exist`);
-  }
-
-  const {
-    raw,
-    path: file_path,
-    toc_tree,
-    updated,
+  return generateMergedMetadata({
     title,
-    timeToComplete,
-    toc,
-    locale,
-    level
-  } = item;
-
-  const { dir } = path.parse(file_path);
-  const imagePath = path.normalize(dir);
-
-  const { content } = await compileMDX({
-    source: raw,
-    components: shortcodes,
-    options: {
-      parseFrontmatter: false,
-      mdxOptions: {
-        remarkPlugins: [
-          ...remarkPlugins,
-          [remarkImage, { prepend: imagePath }],
-          [remarkLocalizeLinks, { locale }]
-        ],
-        rehypePlugins: [...rehypePlugins]
-      }
+    description,
+    alternates: {
+      canonical: fullSlug
+    },
+    twitter: { title, description },
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: fullSlug,
+      locale,
+      modifiedTime: updated
     }
   });
-
-  return {
-    content,
-    breadcrumbs: collectBreadcrumbs(slug),
-    toc: toc_tree,
-    frontmatter: {
-      level,
-      title,
-      toc,
-      updated,
-      timeToComplete
-    }
-  };
 }
 
 export default async function LabPage(props: PageProps) {
@@ -118,8 +73,10 @@ export default async function LabPage(props: PageProps) {
 
   unstable_setRequestLocale(locale);
 
+  const fullSlug = [locale, ...slug].join('/');
   const { content, toc, frontmatter, breadcrumbs } = await compileContent(
-    [locale, ...slug].join('/')
+    fullSlug,
+    { h1: () => null }
   );
 
   /**

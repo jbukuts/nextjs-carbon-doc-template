@@ -1,4 +1,10 @@
+import pick from 'lodash/pick';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
+import { PageHeader } from '#/components/ui';
 import type { Locale } from '#/i18n';
+import compileContent from '#/lib/mdx/compile-content';
+import styles from './[...slug]/page.module.scss';
 
 interface LocalePageProps {
   params: { locale: Locale };
@@ -9,10 +15,37 @@ interface LocalePageProps {
  *
  * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router#static-rendering
  */
-export default function LocalePage(props: LocalePageProps) {
+export default async function LocalePage(props: LocalePageProps) {
   const {
     params: { locale }
   } = props;
 
-  return <>{locale}</>;
+  unstable_setRequestLocale(locale);
+
+  const { content, toc, frontmatter, breadcrumbs } = await compileContent(
+    locale,
+    { h1: () => null }
+  );
+
+  /**
+   * Supply localized text to client components
+   *
+   * @see https://next-intl-docs.vercel.app/docs/environments/server-client-components#option-3-providing-individual-messages
+   */
+  const messages = await getMessages();
+
+  return (
+    <NextIntlClientProvider messages={pick(messages, 'components')}>
+      <div className={styles.page}>
+        <article className={styles.article}>
+          <PageHeader {...frontmatter} breadcrumbs={breadcrumbs}>
+            {toc[0].title || frontmatter.title}
+          </PageHeader>
+          {content}
+        </article>
+        {/** TODO: Implement next/prev logic */}
+        {/* <PageNavFooter /> */}
+      </div>
+    </NextIntlClientProvider>
+  );
 }
