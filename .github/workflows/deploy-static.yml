@@ -6,6 +6,7 @@ on:
       - 'main'
   workflow_dispatch:
 
+# Used in metadata to determine `metadataBase`
 env:
   VERCEL_URL: jbukuts.github.io/nextjs-carbon-doc-template
 
