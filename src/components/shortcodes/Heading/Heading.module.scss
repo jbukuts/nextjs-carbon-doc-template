@@ -10,6 +10,11 @@
     color: themes.$text-primary;
     text-decoration: none;
 
+    &:hover {
+      color: unset;
+      text-decoration: none;
+    }
+
     &:hover::after {
       content: ' #';
       color: themes.$border-subtle-02;

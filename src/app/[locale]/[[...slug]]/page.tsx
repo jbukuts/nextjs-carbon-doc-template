@@ -8,10 +8,8 @@ import { SLUG_MAP } from '#/lib/velite';
 import { generateMergedMetadata } from '#/shared-metadata';
 import styles from './page.module.scss';
 
-type Slug = { slug?: string[]; locale: string };
-
 interface PageProps {
-  params: Slug;
+  params: { slug?: string[]; locale: string };
 }
 
 /**
@@ -19,16 +17,11 @@ interface PageProps {
  *
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
-export function generateStaticParams(): Slug[] {
+export function generateStaticParams(): PageProps['params'][] {
   const slugs: string[] = Object.keys(SLUG_MAP);
   return slugs.map((slug) => {
     const splitSlug = slug.split('/');
     const locale = splitSlug.shift();
-
-    // if (splitSlug.length === 0) splitSlug.push('');
-
-    console.log(locale, splitSlug);
-
     return { slug: splitSlug, locale: locale! };
   });
 }
