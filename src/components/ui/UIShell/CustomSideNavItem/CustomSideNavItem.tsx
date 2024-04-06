@@ -5,7 +5,8 @@ import cx from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
-import styles from '../UIShell.module.scss';
+import shellStyles from '../UIShell.module.scss';
+import styles from './CustomSideNavItem.module.scss';
 
 interface CustomSideNavItemProps {
   href: string;
@@ -28,7 +29,7 @@ export default function CustomSideNavItem(props: CustomSideNavItemProps) {
   const isActive = pathname === href;
   const linkClassName = cx(
     `${prefix}--side-nav__link`,
-    styles[`col-${depth}`],
+    shellStyles[`pl-${depth}`],
     styles.sideNavMenuItem,
     isActive && `${prefix}--side-nav__link--current`
   );

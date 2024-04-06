@@ -30,7 +30,7 @@ export default memo(function SideNavTree(props: SideNavProps) {
         ) : (
           <SideNavMenu
             key={`${title}-inner-menu`}
-            className={styles[`col-${depth}`]}
+            className={styles[`pl-${depth}`]}
             title={title as string}
             defaultExpanded={expanded}>
             {slug && title && (

@@ -2,38 +2,22 @@
 
 import {
   Header,
-  HeaderPanel,
   HeaderGlobalAction,
   HeaderGlobalBar,
   HeaderMenuButton,
   HeaderName,
   SideNav,
   SideNavDivider,
-  SideNavItems,
-  SwitcherItem,
-  Switcher
+  SideNavItems
 } from '@carbon/react';
-import {
-  AsleepFilled,
-  EarthFilled,
-  Home,
-  LightFilled
-} from '@carbon/react/icons';
-import { useRouter } from 'next/navigation';
+import { AsleepFilled, Home, LightFilled } from '@carbon/react/icons';
 import { useLocale, useTranslations } from 'next-intl';
 import { ThemeProvider, useTheme } from 'next-themes';
-import {
-  useState,
-  type ReactNode,
-  useEffect,
-  useReducer,
-  createElement
-} from 'react';
-import { localeMap } from '#/i18n';
-import useSupportedLocales from '#/lib/hooks/useSupportedLocales';
+import { useState, type ReactNode, useEffect, createElement } from 'react';
 import type { SlugTree } from '#/lib/velite/generate-tree';
 import CustomSideNavItem from './CustomSideNavItem';
 import Footer from './Footer';
+import LangDropdown from './LangDropdown/LangDrop';
 import ResponsiveContent from './ResponsiveContent';
 import SearchBar from './SearchBar';
 import SideNavTree from './SideNavTree';
@@ -42,11 +26,6 @@ import styles from './UIShell.module.scss';
 interface UIShellProps {
   children: ReactNode;
   sideBarTree: SlugTree;
-}
-
-interface HeaderState {
-  locale: boolean;
-  toc: boolean;
 }
 
 /**
@@ -79,37 +58,13 @@ function ToggleThemeAction() {
   );
 }
 
-const toggleReducer = (
-  state: HeaderState,
-  action: { key: keyof HeaderState }
-) => {
-  const copyState = JSON.parse(JSON.stringify(state));
-  const { key } = action;
-
-  for (const k of Object.keys(copyState)) {
-    copyState[k as typeof key] = false;
-  }
-
-  copyState[key] = !state[key];
-  return copyState;
-};
-
 export default function UIShell(props: UIShellProps) {
   const { children, sideBarTree } = props;
   const [showSideNav, setShowSideNav] = useState(true);
-  const [{ locale: localeOpen }, toggler] = useReducer<typeof toggleReducer>(
-    toggleReducer,
-    { locale: false }
-  );
-  const supportedLocales = useSupportedLocales(sideBarTree);
   const currentLocale = useLocale();
-  const router = useRouter();
   const t = useTranslations('UIShell');
 
   const toggleSideBar = () => setShowSideNav((o) => !o);
-  const toggleHeader = (key: keyof HeaderState) => {
-    return () => toggler({ key });
-  };
 
   return (
     <ThemeProvider
@@ -131,34 +86,8 @@ export default function UIShell(props: UIShellProps) {
           {/* TODO: Add search function */}
           <SearchBar />
           <ToggleThemeAction />
-          <HeaderGlobalAction
-            isActive={localeOpen}
-            aria-label={t('Header.localeSwitcher.label')}
-            tooltipAlignment='end'
-            onClick={toggleHeader('locale')}>
-            <EarthFilled size={20} className={styles.icon} />
-          </HeaderGlobalAction>
+          <LangDropdown sideBarTree={sideBarTree} />
         </HeaderGlobalBar>
-
-        <HeaderPanel
-          expanded={localeOpen}
-          className={styles.headerPanel}
-          onHeaderPanelFocus={toggleHeader('locale')}>
-          <Switcher
-            aria-label={t('Header.themeSwitcher.label')}
-            expanded={localeOpen}>
-            {supportedLocales.map((loc) => (
-              <SwitcherItem
-                isSelected={loc.locale === currentLocale}
-                onClick={() => router.push(loc.pathname)}
-                key={loc.locale}
-                aria-label={loc.locale}
-                className={styles.switcherItem}>
-                {localeMap[loc.locale]}
-              </SwitcherItem>
-            ))}
-          </Switcher>
-        </HeaderPanel>
 
         <SideNav
           expanded={showSideNav}

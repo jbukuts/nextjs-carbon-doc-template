@@ -1,0 +1,10 @@
+.sideNavMenuItem {
+  & svg {
+    margin-right: layout.$spacing-03;
+    height: 100%;
+
+    & path {
+      height: 100%;
+    }
+  }
+}
