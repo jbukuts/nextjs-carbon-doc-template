@@ -45,9 +45,11 @@ export default defineConfig({
           path: s.path(),
           toc_tree: s.toc({ maxDepth: 3 }),
           raw: s.raw(),
-          excerpt: s.excerpt({ length: 260 })
+          excerpt: s.excerpt({ length: 160 })
         })
         .transform((data) => {
+          const { title: t = '', toc_tree, excerpt } = data;
+
           const splitSlug = data.path.split('/');
           // drop content folder
           splitSlug.shift();
@@ -60,7 +62,8 @@ export default defineConfig({
           if (splitName.length === 1) splitName.push('en');
           const locale = splitName[1];
 
-          const title = data.title ? data.title : data.toc_tree[0].title;
+          const tocTitle = toc_tree.length > 0 ? toc_tree[0].title : '';
+          const title = t ? t : tocTitle;
 
           // create slug
           const slug = [locale, ...splitSlug, splitName[0]]
@@ -68,7 +71,7 @@ export default defineConfig({
             .filter((i) => i !== 'readme')
             .join('/');
 
-          return { ...data, slug, locale, title };
+          return { ...data, slug, locale, title, excerpt: `${excerpt}...` };
         })
     }
   }

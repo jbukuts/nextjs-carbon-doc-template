@@ -1,13 +1,54 @@
 import pick from 'lodash/pick';
+import { Metadata, ResolvingMetadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
 import { PageHeader } from '#/components/ui';
 import type { Locale } from '#/i18n';
 import compileContent from '#/lib/mdx/compile-content';
+import { SLUG_MAP } from '#/lib/velite';
+import { generateMergedMetadata } from '#/shared-metadata';
 import styles from './[...slug]/page.module.scss';
 
 interface LocalePageProps {
   params: { locale: Locale };
+}
+
+/**
+ * Generate SEO metadata
+ *
+ * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+ */
+export async function generateMetadata(
+  props: LocalePageProps,
+  _parent: ResolvingMetadata
+): Promise<Metadata> {
+  const {
+    params: { locale }
+  } = props;
+
+  const { title: t, toc_tree, updated, excerpt, desc } = SLUG_MAP[locale];
+
+  const title = t || toc_tree[0].title || undefined;
+  const description = desc ? desc : excerpt;
+
+  const slug = `/${locale}`;
+
+  return generateMergedMetadata({
+    title,
+    description,
+    alternates: {
+      canonical: slug
+    },
+    twitter: { title, description },
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: slug,
+      locale,
+      modifiedTime: updated
+    }
+  });
 }
 
 /**

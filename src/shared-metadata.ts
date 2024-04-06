@@ -1,5 +1,10 @@
+import 'server-only';
+
 import merge from 'lodash/merge';
 import type { Metadata } from 'next';
+
+const { PORT = 3000, NODE_ENV, VERCEL_URL } = process.env;
+const IS_DEV = NODE_ENV === 'development';
 
 const siteData = {
   title: 'Carbon Next.js Template',
@@ -9,6 +14,9 @@ const siteData = {
 };
 
 const baseMetadata: Metadata = {
+  metadataBase: new URL(
+    IS_DEV ? `http://localhost:${PORT}` : `https://${VERCEL_URL}`
+  ),
   title: siteData.title,
   description: siteData.description,
   alternates: {
