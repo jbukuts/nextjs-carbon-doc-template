@@ -21,12 +21,14 @@
     }
   },
   "components": {
+    "shared": {
+      "lastUpdated": "Última actualización {date}"
+    },
     "QuizAlert": {
       "defaultText": "Atención! Partes de esta sección estarán en el cuestionario."
     },
     "PageHeader": {
-      "scrollToTop": "Ir arriba",
-      "lastUpdated": "Última actualización {date}"
+      "scrollToTop": "Ir arriba"
     },
     "Image": {},
     "CodeBlock": {

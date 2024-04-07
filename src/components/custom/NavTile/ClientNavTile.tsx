@@ -22,7 +22,7 @@ export default function ClientNavTile(props: ClientNavTileProps) {
 
   const formatter = useFormatter();
   const router = useRouter();
-  const t = useTranslations('components.PageHeader');
+  const t = useTranslations('components.shared');
 
   return (
     <ClickableTile

@@ -1,8 +1,9 @@
 'use client';
 
 import { Stack } from '@carbon/react';
-import { useIntersectionObserver } from '@uidotdev/usehooks';
 import cx from 'classnames';
+import { useTranslations } from 'next-intl';
+import useWhenVisible from '#/lib/hooks/useWhenVisible';
 import type { collectBreadcrumbs } from '#/lib/velite';
 import CustomStack from '../Stack';
 import { ReadingTimeTag, UpdatedTag } from '../Tags';
@@ -20,11 +21,13 @@ interface HeaderProps extends React.ComponentProps<'header'> {
 export default function Header(props: HeaderProps) {
   const { children, updated, level, timeToComplete, breadcrumbs = [] } = props;
 
-  const [ref, entry] = useIntersectionObserver({
+  const [ref, visible] = useWhenVisible(true, {
     threshold: 0,
     root: null,
     rootMargin: '-32px'
   });
+
+  const t = useTranslations('components.PageHeader');
 
   return (
     <>
@@ -38,8 +41,10 @@ export default function Header(props: HeaderProps) {
           orientation='horizontal'
           justify='space-between'
           align='flex-start'>
-          {breadcrumbs.length > 0 && (
+          {breadcrumbs.length > 0 ? (
             <ServerBreadCrumbs breadcrumbs={breadcrumbs} />
+          ) : (
+            <div></div>
           )}
           <Stack gap={2} orientation='horizontal'>
             {timeToComplete && (
@@ -53,15 +58,15 @@ export default function Header(props: HeaderProps) {
       </CustomStack>
 
       <CustomStack
-        as='header'
-        className={cx(
-          styles.stickyHeader,
-          !entry?.isIntersecting && styles.showSticky
-        )}
+        as='div'
+        className={cx(styles.stickyHeader, !visible && styles.showSticky)}
         orientation='horizontal'
         align='center'
         justify='space-between'>
-        <a className={styles.staticHeaderTitle} title='Scroll to top' href='#'>
+        <a
+          className={styles.staticHeaderTitle}
+          title={t('scrollToTop')}
+          href='#'>
           {children}
         </a>
       </CustomStack>

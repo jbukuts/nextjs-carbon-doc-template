@@ -29,7 +29,7 @@ const LEVEL_MAP: Record<ContentLevel, TagProps['type']> = {
 export function UpdatedTag(props: UpdatedTagProps) {
   const { updated, type = DEF_TAG_TYPE, ...rest } = props;
 
-  const t = useTranslations('components.PageHeader');
+  const t = useTranslations('components.shared');
   const formatter = useFormatter();
 
   return (
