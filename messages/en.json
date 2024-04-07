@@ -1,6 +1,7 @@
 {
-  "Index": {
-    "title": "Experiential Selling Workshops for IBM Ecosystem Partners"
+  "NotFound": {
+    "title": "Page Not Found",
+    "message": "Looks like the page you requested doesn't exist.<br/><br/>Try one of these:"
   },
   "UIShell": {
     "Header": {

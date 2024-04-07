@@ -3,6 +3,7 @@
 import { IconButton as CopyButton } from '@carbon/react';
 import { Copy } from '@carbon/react/icons';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
+import { useTranslations } from 'next-intl';
 import { Children, createElement, useRef } from 'react';
 import styles from './CodeBlock.module.scss';
 import './highlight.scss';
@@ -44,6 +45,7 @@ function MultiLineCodeBlock(props: CodeBlockProps & { codeLang: string }) {
   const { children, codeLang } = props;
   const [_copiedText, copyToClipboard] = useCopyToClipboard();
   const codeRef = useRef<HTMLElement>(null);
+  const t = useTranslations('components.CodeBlock');
 
   const copyCode = () =>
     codeRef.current && copyToClipboard(codeRef.current.textContent!);
@@ -60,7 +62,7 @@ function MultiLineCodeBlock(props: CodeBlockProps & { codeLang: string }) {
           size='md'
           kind='ghost'
           align='bottom-right'
-          label={'Copy code to clipboad'}
+          label={t('copyText')}
           onClick={copyCode}>
           <Copy />
         </CopyButton>

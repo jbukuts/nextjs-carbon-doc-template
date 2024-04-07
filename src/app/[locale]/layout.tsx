@@ -31,13 +31,21 @@ export default function LocaleLayout({
 }: Readonly<LocaleLayoutProps>) {
   unstable_setRequestLocale(locale);
 
+  /**
+   * Supply localized text to client components
+   *
+   * @see https://next-intl-docs.vercel.app/docs/environments/server-client-components#option-3-providing-individual-messages
+   */
   const messages = useMessages();
 
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider messages={pick(messages, 'UIShell')}>
-          <UIShell sideBarTree={SLUG_TREE}>{children}</UIShell>
+        <NextIntlClientProvider
+          messages={pick(messages, ['UIShell', 'components'])}>
+          <UIShell sideBarTree={SLUG_TREE}>
+            <div className='page-wrapper'>{children}</div>
+          </UIShell>
         </NextIntlClientProvider>
       </body>
     </html>

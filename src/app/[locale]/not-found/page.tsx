@@ -1,4 +1,13 @@
-import { LOCALE_LIST } from '#/lib/velite';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+import NavTile from '#/components/custom/NavTile';
+import TileGrid from '#/components/custom/TileGrid';
+import { PageHeader } from '#/components/ui';
+import { LOCALE_LIST, SLUG_TREE } from '#/lib/velite';
+import styles from './page.module.scss';
+
+interface FourOhFourProps {
+  params: { locale: string };
+}
 
 /**
  * SSG function to determine slugs to prerender
@@ -12,10 +21,37 @@ export async function generateStaticParams() {
 /**
  * Localized 404 Error Page
  */
-export default function FourOhFour() {
+export default async function FourOhFour(props: FourOhFourProps) {
+  const {
+    params: { locale }
+  } = props;
+
+  unstable_setRequestLocale(locale);
+  const t = await getTranslations('NotFound');
+  const topLevelItems = Object.values(SLUG_TREE.children![locale].children!);
+
   return (
     <div>
-      <h1>404 Not found</h1>
+      <PageHeader>404 - {t('title')}</PageHeader>
+      <div>
+        <p
+          className={styles.message}
+          dangerouslySetInnerHTML={{ __html: t('message') }}></p>
+        <TileGrid>
+          {topLevelItems.map((i, idx) => {
+            return (
+              i.slug && (
+                <NavTile
+                  key={idx}
+                  to={i.slug.substring(1)}
+                  prefix={false}
+                  recursive
+                />
+              )
+            );
+          })}
+        </TileGrid>
+      </div>
     </div>
   );
 }
