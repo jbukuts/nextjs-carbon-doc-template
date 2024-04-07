@@ -18,7 +18,7 @@ interface ClientNavTileProps {
 }
 
 export default function ClientNavTile(props: ClientNavTileProps) {
-  const { title, updated, timeToComplete, to, children } = props;
+  const { title, updated, timeToComplete = 0, to, children } = props;
 
   const formatter = useFormatter();
   const router = useRouter();
@@ -54,7 +54,9 @@ export default function ClientNavTile(props: ClientNavTileProps) {
           orientation='horizontal'
           align='center'
           justify={timeToComplete ? 'space-between' : 'flex-end'}>
-          {timeToComplete && <ReadingTimeTag timeToComplete={timeToComplete} />}
+          {timeToComplete > 0 && (
+            <ReadingTimeTag timeToComplete={timeToComplete} />
+          )}
           <ArrowRight size={16} />
         </CustomStack>
       </CustomStack>

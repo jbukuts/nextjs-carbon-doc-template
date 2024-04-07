@@ -23,6 +23,7 @@ dialog:modal {
   max-height: 100vh;
 }
 
+// global helper classes to hide items at breakpoints
 @each $name, $sz in resources.$breakpoints {
   .hide-lesser-than-#{$name} {
     @include resources.apply-lesser-than($name) {
@@ -35,4 +36,10 @@ dialog:modal {
       display: none !important;
     }
   }
+}
+
+// global helper class to wrap content correctly
+// so it aligns with sidenav
+.page-wrapper {
+  @include resources.repsonsive-content;
 }

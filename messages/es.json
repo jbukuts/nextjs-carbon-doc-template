@@ -1,6 +1,7 @@
 {
-  "Index": {
-    "title": "Talleres de Venta Experiencial para Socios del Ecosistema IBM"
+  "NotFound": {
+    "title": "Página no encontrada",
+    "message": "Parece que la página solicitada no existe.<br/><br/>Pruebe con una de estas:"
   },
   "UIShell": {
     "Header": {

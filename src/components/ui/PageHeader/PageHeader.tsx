@@ -23,7 +23,7 @@ export default function Header(props: HeaderProps) {
   const [ref, entry] = useIntersectionObserver({
     threshold: 0,
     root: null,
-    rootMargin: '-48px'
+    rootMargin: '-32px'
   });
 
   return (
@@ -38,7 +38,9 @@ export default function Header(props: HeaderProps) {
           orientation='horizontal'
           justify='space-between'
           align='flex-start'>
-          <ServerBreadCrumbs breadcrumbs={breadcrumbs} />
+          {breadcrumbs.length > 0 && (
+            <ServerBreadCrumbs breadcrumbs={breadcrumbs} />
+          )}
           <Stack gap={2} orientation='horizontal'>
             {timeToComplete && (
               <ReadingTimeTag type='gray' timeToComplete={timeToComplete} />

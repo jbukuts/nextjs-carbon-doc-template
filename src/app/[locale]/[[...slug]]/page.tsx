@@ -1,7 +1,5 @@
-import pick from 'lodash/pick';
 import type { Metadata, ResolvingMetadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import { PageHeader } from '#/components/ui';
 import compileContent from '#/lib/mdx/compile-content';
 import { SLUG_MAP } from '#/lib/velite';
@@ -76,25 +74,16 @@ export default async function LabPage(props: PageProps) {
     { h1: () => null }
   );
 
-  /**
-   * Supply localized text to client components
-   *
-   * @see https://next-intl-docs.vercel.app/docs/environments/server-client-components#option-3-providing-individual-messages
-   */
-  const messages = await getMessages();
-
   return (
-    <NextIntlClientProvider messages={pick(messages, 'components')}>
-      <div className={styles.page}>
-        <article className={styles.article}>
-          <PageHeader {...frontmatter} breadcrumbs={breadcrumbs}>
-            {toc[0].title || frontmatter.title}
-          </PageHeader>
-          {content}
-        </article>
-        {/** TODO: Implement next/prev logic */}
-        {/* <PageNavFooter /> */}
-      </div>
-    </NextIntlClientProvider>
+    <>
+      <article className={styles.article}>
+        <PageHeader {...frontmatter} breadcrumbs={breadcrumbs}>
+          {toc[0].title || frontmatter.title}
+        </PageHeader>
+        {content}
+      </article>
+      {/** TODO: Implement next/prev logic */}
+      {/* <PageNavFooter /> */}
+    </>
   );
 }

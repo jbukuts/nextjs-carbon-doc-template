@@ -22,6 +22,10 @@ interface NavTileProps {
    * Whether children pages should be added to completion time tag
    */
   recursive?: boolean;
+  /**
+   * Whether to prefix `to` value with locale
+   */
+  prefix?: boolean;
 }
 
 // TODO add recursive calcluation of time and date
@@ -49,10 +53,16 @@ function getItem(slug: string, recursive: boolean) {
 }
 
 export default async function NavTile(props: NavTileProps) {
-  const { to, children, blank = false, recursive = false } = props;
+  const {
+    to,
+    children,
+    blank = false,
+    recursive = false,
+    prefix = true
+  } = props;
   const locale = await getLocale();
 
-  const slug = `${locale}${to}`;
+  const slug = `${prefix ? locale : ''}${to}`;
   const { title, timeToComplete, updated, desc } = getItem(slug, recursive);
   const content = blank ? null : children || (desc && <p>{desc}</p>);
 

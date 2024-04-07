@@ -26,15 +26,15 @@ $def-padding: layout.$spacing-07;
 $small-padding: layout.$spacing-05;
 $large-padding: 10vw;
 
-@mixin repsonsive-content($vert-padding: 0) {
-  padding: $vert-padding $def-padding;
+@mixin repsonsive-content() {
+  padding: 0 $def-padding $def-padding $def-padding;
 
   @include apply-lesser-than('md') {
-    padding: $vert-padding $small-padding;
+    padding: 0 $small-padding $small-padding $small-padding;
   }
 
   @include apply-greater-than('xl') {
-    padding: $vert-padding $large-padding;
+    padding: 0 $large-padding layout.$spacing-07 $large-padding;
   }
 }
 

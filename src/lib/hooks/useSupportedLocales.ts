@@ -34,6 +34,12 @@ export default function useSupportedLocales(sideBarTree: SlugTree) {
           locale,
           pathname: ['', locale, ...splitPath.slice(1)].join('/')
         });
+
+      // manually insert 404 page
+      supported.push({
+        locale,
+        pathname: `/${locale}/not-found`
+      });
     }
 
     setSupportedLocales(supported);

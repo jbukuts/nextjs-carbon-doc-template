@@ -15,7 +15,7 @@ $header-bg: 'layer-01';
   padding: layout.$spacing-07 0;
   position: relative;
   z-index: 999;
-  margin-bottom: 0 !important;
+  margin-bottom: layout.$spacing-05 !important;
   min-height: layout.to-rem(200px);
 
   & > h1 {
