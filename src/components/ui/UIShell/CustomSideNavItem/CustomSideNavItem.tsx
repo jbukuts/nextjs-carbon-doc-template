@@ -1,6 +1,7 @@
 'use client';
 
 import { SideNavLinkText, usePrefix } from '@carbon/react';
+import type { Icon as CarbonIconType } from '@carbon/react/icons';
 import cx from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,7 +13,7 @@ interface CustomSideNavItemProps {
   href: string;
   children: ReactNode;
   depth?: number;
-  renderIcon?: React.ElementType;
+  renderIcon?: typeof CarbonIconType;
 }
 
 /**
@@ -42,12 +43,10 @@ export default function CustomSideNavItem(props: CustomSideNavItemProps) {
   return (
     <li className={itemClassName}>
       <Link href={href} className={linkClassName}>
-        {CustomIconElement ? (
+        {CustomIconElement && (
           <div className={`${prefix}--tag__custom-icon`}>
             <CustomIconElement />
           </div>
-        ) : (
-          ''
         )}
         <SideNavLinkText>{children}</SideNavLinkText>
       </Link>

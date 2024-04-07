@@ -30,7 +30,7 @@ interface UIShellProps {
 
 export default function UIShell(props: UIShellProps) {
   const { children, sideBarTree } = props;
-  const [showSideNav, setShowSideNav] = useState(false);
+  const [showSideNav, setShowSideNav] = useState(true);
   const currentLocale = useLocale();
   const t = useTranslations('UIShell');
 
@@ -53,13 +53,14 @@ export default function UIShell(props: UIShellProps) {
         />
         <HeaderName prefix='Carbon'>Next.js Template</HeaderName>
         <HeaderGlobalBar>
-          {/* TODO: Add search function */}
           <SearchBar />
           <ToggleThemeAction />
           <LangDropdown sideBarTree={sideBarTree} />
         </HeaderGlobalBar>
 
         <SideNav
+          isPersistent
+          isChildOfHeader
           expanded={showSideNav}
           onOverlayClick={toggleSideBar}
           onSideNavBlur={toggleSideBar}
@@ -71,7 +72,7 @@ export default function UIShell(props: UIShellProps) {
             </CustomSideNavItem>
             <SideNavDivider />
             <SideNavTree
-              navItems={sideBarTree.children![currentLocale]!.children!}
+              navItems={sideBarTree.children![currentLocale].children || {}}
             />
           </SideNavItems>
         </SideNav>

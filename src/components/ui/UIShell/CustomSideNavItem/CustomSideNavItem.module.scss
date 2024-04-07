@@ -1,6 +1,10 @@
 .sideNavMenuItem {
-  & svg {
+  & :global(.cds--tag__custom-icon) {
     margin-right: layout.$spacing-03;
+  }
+
+  & svg {
+    fill: themes.$text-primary;
     height: 100%;
 
     & path {

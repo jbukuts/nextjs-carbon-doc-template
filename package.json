@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "concurrently -k -n 'velite,next' -c 'green,blue' 'npm:velite:watch' 'next dev'",
     "build": "npm run velite && next build",
-    "start": "next start",
+    "start": "npm run build && npm run serve",
+    "preview": "next start",
     "test": "vitest run --coverage",
     "lint": "eslint . --ext js,mjs,cjs,ts,tsx",
     "lint:md": "eslint ./content --ext md,mdx",
