@@ -30,7 +30,7 @@ interface UIShellProps {
 
 export default function UIShell(props: UIShellProps) {
   const { children, sideBarTree } = props;
-  const [showSideNav, setShowSideNav] = useState(true);
+  const [showSideNav, setShowSideNav] = useState(false);
   const currentLocale = useLocale();
   const t = useTranslations('UIShell');
 

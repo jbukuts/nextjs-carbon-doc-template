@@ -1,6 +1,7 @@
 import { Tag, TagBaseProps } from '@carbon/react';
 import { Apple, Calendar, Timer } from '@carbon/react/icons';
 import { useFormatter, useTranslations } from 'next-intl';
+import { Suspense } from 'react';
 import { toHoursAndMinutes } from '#/lib/helpers';
 
 type TagProps = TagBaseProps;
@@ -32,15 +33,17 @@ export function UpdatedTag(props: UpdatedTagProps) {
   const formatter = useFormatter();
 
   return (
-    <Tag {...rest} renderIcon={Calendar} type={type}>
-      {t('lastUpdated', {
-        date: formatter.dateTime(new Date(updated), {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
-        })
-      })}
-    </Tag>
+    <Suspense fallback={null}>
+      <Tag {...rest} renderIcon={Calendar} type={type}>
+        {t('lastUpdated', {
+          date: formatter.dateTime(new Date(updated), {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          })
+        })}
+      </Tag>
+    </Suspense>
   );
 }
 
@@ -48,9 +51,11 @@ export function ReadingTimeTag(props: ReadingTimeTagProps) {
   const { timeToComplete, type = DEF_TAG_TYPE, ...rest } = props;
 
   return (
-    <Tag {...rest} renderIcon={Timer} type={type}>
-      {toHoursAndMinutes(timeToComplete)}
-    </Tag>
+    <Suspense fallback={null}>
+      <Tag {...rest} renderIcon={Timer} type={type}>
+        {toHoursAndMinutes(timeToComplete)}
+      </Tag>
+    </Suspense>
   );
 }
 

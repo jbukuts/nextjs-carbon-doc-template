@@ -67,8 +67,8 @@ $header-bg: 'layer-01';
   }
 
   &.showSticky {
-    user-select: all;
-    pointer-events: all;
+    user-select: unset;
+    pointer-events: unset;
     opacity: 1;  
   }
 

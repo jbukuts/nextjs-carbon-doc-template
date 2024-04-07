@@ -17,6 +17,6 @@
   gap: layout.$spacing-05;
 
   @include resources.apply-lesser-than('md') {
-    & > p { display: none;}
+    & > span { display: none;}
   }
 }

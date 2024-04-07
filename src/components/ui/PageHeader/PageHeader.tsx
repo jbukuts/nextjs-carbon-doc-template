@@ -26,16 +26,6 @@ export default function Header(props: HeaderProps) {
     rootMargin: '-48px'
   });
 
-  const tagStack = (
-    <Stack gap={2} orientation='horizontal'>
-      {timeToComplete && (
-        <ReadingTimeTag type='gray' timeToComplete={timeToComplete} />
-      )}
-      {updated && <UpdatedTag type='gray' updated={updated} />}
-      {level && <ContentLevelTag level={level} />}
-    </Stack>
-  );
-
   return (
     <>
       <CustomStack
@@ -49,7 +39,13 @@ export default function Header(props: HeaderProps) {
           justify='space-between'
           align='flex-start'>
           <ServerBreadCrumbs breadcrumbs={breadcrumbs} />
-          {tagStack}
+          <Stack gap={2} orientation='horizontal'>
+            {timeToComplete && (
+              <ReadingTimeTag type='gray' timeToComplete={timeToComplete} />
+            )}
+            {updated && <UpdatedTag type='gray' updated={updated} />}
+            {level && <ContentLevelTag level={level} />}
+          </Stack>
         </CustomStack>
         <h1>{children}</h1>
       </CustomStack>
@@ -66,7 +62,6 @@ export default function Header(props: HeaderProps) {
         <a className={styles.staticHeaderTitle} title='Scroll to top' href='#'>
           {children}
         </a>
-        {tagStack}
       </CustomStack>
     </>
   );

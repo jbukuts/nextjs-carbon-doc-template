@@ -15,31 +15,36 @@ export default function LangDropdown(props: LangDropdownProps) {
   const { sideBarTree } = props;
 
   const t = useTranslations('UIShell');
-  const currentLocale = useLocale();
+  const currentLocale = useLocale() || undefined;
   const supportedLocales = useSupportedLocales(sideBarTree);
   const router = useRouter();
 
-  const currentItem = supportedLocales.find((i) => i.locale === currentLocale);
-
   return (
-    <Dropdown
-      renderSelectedItem={(i) => (
-        <div className={styles.selectedItem}>
-          <EarthFilled size={20} className={styles.icon} />
-          <p>{localeMap[i!.locale]}</p>
-        </div>
-      )}
-      titleText=''
-      aria-label={t('Header.localeSwitcher.label')}
-      onChange={(s) => s.selectedItem && router.push(s.selectedItem.pathname)}
-      selectedItem={currentItem}
-      disabled={supportedLocales.length === 1}
-      className={styles.selectLang}
-      label={t('Header.localeSwitcher.label')}
-      itemToString={(i) => localeMap[i!.locale]}
-      id='locale-select'
-      items={supportedLocales}
-      size='lg'
-    />
+    supportedLocales.length > 0 &&
+    currentLocale && (
+      <Dropdown
+        renderSelectedItem={(i) => (
+          <div className={styles.selectedItem}>
+            <EarthFilled size={20} className={styles.icon} />
+            <span>{localeMap[i!.locale]}</span>
+          </div>
+        )}
+        titleText=''
+        aria-label={t('Header.localeSwitcher.label')}
+        onChange={({ selectedItem }) =>
+          selectedItem && router.push(selectedItem.pathname)
+        }
+        initialSelectedItem={supportedLocales.find(
+          (i) => i.locale === currentLocale
+        )}
+        disabled={supportedLocales.length === 1}
+        className={styles.selectLang}
+        label={t('Header.localeSwitcher.label')}
+        itemToString={(i) => localeMap[i!.locale]}
+        id='locale-select'
+        items={supportedLocales}
+        size='lg'
+      />
+    )
   );
 }

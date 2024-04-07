@@ -2,7 +2,7 @@
 
 import MiniSearch, { SearchResult } from 'minisearch';
 import { useEffect, useState } from 'react';
-import { SearchItem } from '#/app/[locale]/search_index/route';
+import { SearchItem } from '#/app/[locale]/search_index.json/route';
 
 /**
  * Allow for search of static from static index file
@@ -17,7 +17,7 @@ export default function useSearch() {
     if (searchIndex) return;
 
     // load preindexed file from route
-    fetch('/en/search_index').then(async (r) => {
+    fetch('/en/search_index.json').then(async (r) => {
       const serialIdx = await r.text();
       const idx = MiniSearch.loadJSON<SearchItem>(serialIdx, {
         fields: ['title', 'text'],
