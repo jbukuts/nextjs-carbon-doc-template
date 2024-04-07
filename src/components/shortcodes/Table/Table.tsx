@@ -22,9 +22,11 @@ export default function Table(props: TableProps) {
   const { children } = props;
 
   return (
-    <StructuredListWrapper className={styles.tableWrapper} isCondensed>
-      {children}
-    </StructuredListWrapper>
+    <div className={styles.tableWrapper}>
+      <StructuredListWrapper className={styles.table} isCondensed>
+        {children}
+      </StructuredListWrapper>
+    </div>
   );
 }
 

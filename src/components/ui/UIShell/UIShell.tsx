@@ -2,7 +2,6 @@
 
 import {
   Header,
-  HeaderGlobalAction,
   HeaderGlobalBar,
   HeaderMenuButton,
   HeaderName,
@@ -10,52 +9,23 @@ import {
   SideNavDivider,
   SideNavItems
 } from '@carbon/react';
-import { AsleepFilled, Home, LightFilled } from '@carbon/react/icons';
+import { Home } from '@carbon/react/icons';
 import { useLocale, useTranslations } from 'next-intl';
-import { ThemeProvider, useTheme } from 'next-themes';
-import { useState, type ReactNode, useEffect, createElement } from 'react';
+import { ThemeProvider } from 'next-themes';
+import { useState, type ReactNode } from 'react';
 import type { SlugTree } from '#/lib/velite/generate-tree';
 import CustomSideNavItem from './CustomSideNavItem';
 import Footer from './Footer';
-import LangDropdown from './LangDropdown/LangDrop';
+import LangDropdown from './LangDropdown';
 import ResponsiveContent from './ResponsiveContent';
 import SearchBar from './SearchBar';
 import SideNavTree from './SideNavTree';
+import ToggleThemeAction from './ToggleThemeAction';
 import styles from './UIShell.module.scss';
 
 interface UIShellProps {
   children: ReactNode;
   sideBarTree: SlugTree;
-}
-
-/**
- * Displays header action that allows for theme switch
- */
-function ToggleThemeAction() {
-  const [mounted, setMounted] = useState(false);
-  const { setTheme, resolvedTheme } = useTheme();
-  const t = useTranslations('UIShell.Header.themeSwitcher');
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  };
-
-  if (!mounted) return null;
-
-  return (
-    <HeaderGlobalAction
-      aria-label={t('label')}
-      tooltipAlignment='end'
-      onClick={toggleTheme}>
-      {createElement(resolvedTheme === 'dark' ? LightFilled : AsleepFilled, {
-        size: 20
-      })}
-    </HeaderGlobalAction>
-  );
 }
 
 export default function UIShell(props: UIShellProps) {

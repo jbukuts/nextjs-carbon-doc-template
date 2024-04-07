@@ -7,15 +7,15 @@ $margin: layout.$spacing-06;
 .article {
   position: relative;
 
+  & > section {
+    margin-top: $margin;
+  }
+
   & > * {
     margin-bottom: $margin;
   }
 
   & section > * {
     margin-bottom: $margin;
-  }
-
-  & > *:nth-child(2) {
-    margin-top: $margin;
   }
 }

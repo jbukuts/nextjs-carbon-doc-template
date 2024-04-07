@@ -18,6 +18,7 @@ interface CustomStackProps extends Omit<StackProps, 'gap'> {
     | 'space-between'
     | 'space-around'
     | 'space-evenly';
+  responsive?: boolean;
 }
 
 /**
@@ -41,6 +42,7 @@ export default forwardRef<HTMLElement, CustomStackProps>(function Stack(
     spacing = 0,
     justify,
     align,
+    responsive = false,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -50,6 +52,7 @@ export default forwardRef<HTMLElement, CustomStackProps>(function Stack(
     styles[orientation],
     justify && [styles.justify, styles[`justify-${justify}`]],
     align && [styles.align, styles[`align-${align}`]],
+    orientation === 'horizontal' && responsive && styles.responsive,
     spacing > 0 && `${prefix}--stack-scale-${spacing}`,
     className && className
   );

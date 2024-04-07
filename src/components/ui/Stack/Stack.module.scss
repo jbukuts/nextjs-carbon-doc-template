@@ -5,6 +5,13 @@
 
 .horizontal {
   flex-direction: row;
+
+  @include resources.apply-lesser-than('md') {
+    &.responsive {
+      flex-direction: column;
+    }
+  }
+  
 }
 
 .vertical {

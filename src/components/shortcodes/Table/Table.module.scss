@@ -1,6 +1,8 @@
 .tableWrapper {
   border-left: 1px solid themes.$border-subtle-00;
   border-right: 1px solid themes.$border-subtle-00;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .tableHeader {

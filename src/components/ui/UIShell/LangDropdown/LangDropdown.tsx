@@ -26,9 +26,10 @@ export default function LangDropdown(props: LangDropdownProps) {
       renderSelectedItem={(i) => (
         <div className={styles.selectedItem}>
           <EarthFilled size={20} className={styles.icon} />
-          {localeMap[i!.locale]}
+          <p>{localeMap[i!.locale]}</p>
         </div>
       )}
+      titleText=''
       aria-label={t('Header.localeSwitcher.label')}
       onChange={(s) => s.selectedItem && router.push(s.selectedItem.pathname)}
       selectedItem={currentItem}

@@ -1,15 +1,15 @@
 .searchWrapper {
-  position: relative;
-  width: layout.to-rem(500px);
+  position: relative;  
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  max-width: layout.to-rem(500px);
+  flex-grow: 1;
 }
 
 .searchBar {
+  justify-content: flex-end;
   
-  // justify-content: flex-end;
-
   &:global(.cds--search--expanded) input[role='searchbox'] {
     padding-left: layout.$spacing-09 !important;
     padding-right: 0 !important;
@@ -54,11 +54,16 @@
     gap: layout.$spacing-03;
     justify-content: flex-start;
     align-items: center;
-    // margin-bottom: layout.$spacing-04;
   }
 
   &:hover {
     background-color: themes.$layer-02;
     cursor: pointer;
+  }
+}
+
+@include resources.apply-lesser-than('md') {
+  .searchWrapper {
+    display: none;
   }
 }
