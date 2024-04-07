@@ -12,20 +12,11 @@ In this document is a list of the custom components available for use within you
 
 All source code for these components can be found within `src/components/shortcodes`.
 
-## Basic text
+## Tokenization Applet
 
-Basic text is translated as a `p` tag in HTML.
+The `TokenizationApplet` is an interactive component that shows off the transformation from text to tokens. It is built off of `@xenova/transformers` package which in turn is built off of Hugging Face's `transformers` package in Python.
 
-## Tables
-
-Tables are transformed to conform to the `StructuredList` component with Carbon.
-
-Here is an example:
-
-| One | Two | Three |
-| --- | --- | ----- |
-| a   | b   | **c** |
-| you | and | _me_  |
+<TokenizationApplet />
 
 ## Callouts
 
@@ -39,12 +30,6 @@ All callouts have the same props available as under the hood they make use of th
 | `children` | `ReactNode` | Content with the callout. Allows for nested styling.                     | yes      |
 
 Let's take a look at each of them in action with different props applied.
-
-### Tokenization Applet
-
-The `TokenizationApplet` is an interactive component that shows off the transformation from text to tokens. It is built off of `@xenova/transformers` package which in turn is built off of Hugging Face's `transformers` package in Python.
-
-<TokenizationApplet />
 
 ### QuizAlert
 
