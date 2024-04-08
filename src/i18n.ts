@@ -10,7 +10,7 @@ export const locales: Locale[] = ['en', 'es'];
 
 export const localeMap: Record<Locale, string> = {
   en: 'English',
-  es: 'Espanol'
+  es: 'Español'
 };
 
 export default getRequestConfig(async ({ locale }) => {
