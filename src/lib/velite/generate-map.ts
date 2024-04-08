@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { labs } from '../../../.velite';
+import { Lab, labs } from '../../../.velite';
 
 /**
  *
@@ -12,6 +12,6 @@ export default function generateMap() {
       acc[curr.slug] = curr;
       return acc;
     },
-    {} as Record<string, (typeof labs)[0]>
+    {} as Record<string, Lab>
   );
 }

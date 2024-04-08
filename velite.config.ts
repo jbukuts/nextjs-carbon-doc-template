@@ -15,7 +15,7 @@ export default defineConfig({
         })
         .transform((data) => {
           const { path } = data;
-          const { locale } = parseLocaleFromFilePath(path);
+          const { locale } = parseLocaleFromFilePath(path + '.md');
           return { ...data, locale };
         })
     },
@@ -40,8 +40,8 @@ export default defineConfig({
         .transform((data) => {
           const { title: t = '', toc_tree, excerpt, path } = data;
 
-          const { locale } = parseLocaleFromFilePath(path);
-          const slug = generateSlugFromPath(path, { start: 1 });
+          const { locale } = parseLocaleFromFilePath(path + '.md');
+          const slug = generateSlugFromPath(path + '.md', { start: 1 });
 
           const tocTitle = toc_tree.length > 0 ? toc_tree[0].title : '';
           const title = t ? t : tocTitle;

@@ -109,6 +109,16 @@ export function generateSlugFromPath(p: string, opts: GenSlugOptions = {}) {
 }
 
 /**
+ * safely split slug strings into array
+ *
+ * @param s slug string
+ * @returns string array of items
+ */
+export function splitSlug(s: string) {
+  return s.split('/').filter((n) => !!n);
+}
+
+/**
  * Formats time in minutes to hours and minutes string
  *
  *@example <caption>Under 1 hour</caption>

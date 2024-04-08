@@ -1,13 +1,10 @@
 import 'server-only';
 
 import setWith from 'lodash/setWith';
-import type { labs } from '../../../.velite';
-import generateMap from './generate-map';
-
-const SLUG_MAP = generateMap();
+import { labs, Lab } from '../../../.velite';
 
 type FrontMatterData = Pick<
-  (typeof labs)[0],
+  Lab,
   'timeToComplete' | 'title' | 'updated' | 'toc'
 >;
 
@@ -26,11 +23,10 @@ export interface SlugTree {
 export default function generateSlugTree(): SlugTree {
   const tree: SlugTree['children'] = {};
 
-  const list = Object.entries(SLUG_MAP).sort((a, b) =>
-    a[0].localeCompare(b[0])
-  );
+  const sorted = labs.toSorted((a, b) => a.slug.localeCompare(b.slug));
 
-  for (const [slug, item] of list) {
+  for (const item of sorted) {
+    const { slug } = item;
     const directories = slug.split('/');
 
     const { title, updated, timeToComplete, toc, toc_tree } = item;
