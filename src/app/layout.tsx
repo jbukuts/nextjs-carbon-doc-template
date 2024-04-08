@@ -15,5 +15,5 @@ interface RootLayoutProps {
 export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
-  return children;
+  return <html>{children}</html>;
 }

@@ -39,15 +39,13 @@ export default function LocaleLayout({
   const messages = useMessages();
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider
-          messages={pick(messages, ['UIShell', 'components'])}>
-          <UIShell sideBarTree={SLUG_TREE}>
-            <div className='page-wrapper'>{children}</div>
-          </UIShell>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <body lang={locale}>
+      <NextIntlClientProvider
+        messages={pick(messages, ['UIShell', 'components'])}>
+        <UIShell sideBarTree={SLUG_TREE}>
+          <div className='page-wrapper'>{children}</div>
+        </UIShell>
+      </NextIntlClientProvider>
+    </body>
   );
 }

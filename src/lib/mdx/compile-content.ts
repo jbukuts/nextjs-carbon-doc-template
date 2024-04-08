@@ -1,13 +1,20 @@
 import path from 'path';
 import { compileMDX, MDXRemoteProps } from 'next-mdx-remote/rsc';
+import type { PluggableList } from 'unified';
 import { remarkImage, remarkLocalizeLinks } from '#/lib/plugins/remark';
 import mdxConfig from '#mdx-config';
 import { SLUG_MAP, collectBreadcrumbs } from '../velite';
 import shortcodes from './shortcodes';
 
-const { remarkPlugins, rehypePlugins } = mdxConfig;
+const { remarkPlugins: defRemarkPlugins, rehypePlugins: defRehypePlugins } =
+  mdxConfig;
 
 type ComponentMap = MDXRemoteProps['components'];
+
+type Plugins = {
+  rehypePlugins?: PluggableList;
+  remarkPlugins?: PluggableList;
+};
 
 /**
  * Compiles raw MDX string to final rendered element
@@ -17,8 +24,11 @@ type ComponentMap = MDXRemoteProps['components'];
  */
 export default async function compileContent(
   slug: string,
-  overrides: ComponentMap = {}
+  overrides: ComponentMap = {},
+  plugins: Plugins = {}
 ) {
+  const { rehypePlugins = [], remarkPlugins = [] } = plugins;
+
   const item = SLUG_MAP[slug];
 
   if (!item) {
@@ -47,11 +57,12 @@ export default async function compileContent(
       parseFrontmatter: false,
       mdxOptions: {
         remarkPlugins: [
+          ...defRemarkPlugins,
           ...remarkPlugins,
           [remarkImage, { prepend: imagePath }],
           [remarkLocalizeLinks, { locale }]
         ],
-        rehypePlugins: [...rehypePlugins]
+        rehypePlugins: [...defRehypePlugins, ...rehypePlugins]
       }
     }
   });
