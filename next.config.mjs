@@ -30,7 +30,7 @@ const withNextIntl = createNextIntlPlugin();
 // }
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withNextIntl({
   output: 'export',
   images: {
     // loader: 'custom',
@@ -75,6 +75,6 @@ const nextConfig = {
       }
     }
   }
-};
+});
 
-export default withNextIntl(nextConfig);
+export default nextConfig;
