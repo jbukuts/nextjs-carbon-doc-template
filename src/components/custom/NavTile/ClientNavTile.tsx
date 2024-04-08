@@ -27,7 +27,11 @@ export default function ClientNavTile(props: ClientNavTileProps) {
   return (
     <ClickableTile
       title={title}
-      onClick={() => router.push(to)}
+      onClick={(e) => {
+        e.preventDefault();
+        router.push(to);
+      }}
+      href={to}
       onMouseEnter={() => router.prefetch(to)}>
       <CustomStack
         className={styles.tileStack}
