@@ -2,7 +2,7 @@ import slugify from 'slugify';
 import { defineConfig, s } from 'velite';
 
 export default defineConfig({
-  root: './',
+  root: './content',
   collections: {
     fragments: {
       name: 'Fragment',
@@ -22,7 +22,7 @@ export default defineConfig({
           const name = splitSlug.pop();
 
           // extract locale from file name
-          const splitName = name.split('.');
+          const splitName = name!.split('.');
           if (splitName.length === 1) splitName.push('en');
           const locale = splitName[1];
 
@@ -31,7 +31,7 @@ export default defineConfig({
     },
     labs: {
       name: 'Lab',
-      pattern: 'content/**/*.{md,mdx}',
+      pattern: 'labs/**/*.{md,mdx}',
       schema: s
         .object({
           // frontmatter data
@@ -58,7 +58,7 @@ export default defineConfig({
           const name = splitSlug.pop();
 
           // extract locale from file name
-          const splitName = name.split('.');
+          const splitName = name!.split('.');
           if (splitName.length === 1) splitName.push('en');
           const locale = splitName[1];
 
