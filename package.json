@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -k -n 'velite,next' -c 'green,blue' 'npm:velite:watch' 'next dev'",
+    "dev": "concurrently -k -n \"velite,next\" -c \"green,blue\" \"npm:velite:watch\" \"next dev\"",
     "build": "npm run velite && next build",
     "start": "npm run build && npm run serve",
     "preview": "next start",
