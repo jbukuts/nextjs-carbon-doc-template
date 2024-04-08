@@ -1,5 +1,5 @@
-import slugify from 'slugify';
 import { defineConfig, s } from 'velite';
+import { generateSlugFromPath, parseLocaleFromFilePath } from '#/lib/helpers';
 
 export default defineConfig({
   root: './content',
@@ -14,18 +14,8 @@ export default defineConfig({
           path: s.path()
         })
         .transform((data) => {
-          const splitSlug = data.path.split('/');
-          // drop content folder
-          splitSlug.shift();
-
-          // name is last item in path
-          const name = splitSlug.pop();
-
-          // extract locale from file name
-          const splitName = name!.split('.');
-          if (splitName.length === 1) splitName.push('en');
-          const locale = splitName[1];
-
+          const { path } = data;
+          const { locale } = parseLocaleFromFilePath(path);
           return { ...data, locale };
         })
     },
@@ -48,28 +38,13 @@ export default defineConfig({
           excerpt: s.excerpt({ length: 160 })
         })
         .transform((data) => {
-          const { title: t = '', toc_tree, excerpt } = data;
+          const { title: t = '', toc_tree, excerpt, path } = data;
 
-          const splitSlug = data.path.split('/');
-          // drop content folder
-          splitSlug.shift();
-
-          // name is last item in path
-          const name = splitSlug.pop();
-
-          // extract locale from file name
-          const splitName = name!.split('.');
-          if (splitName.length === 1) splitName.push('en');
-          const locale = splitName[1];
+          const { locale } = parseLocaleFromFilePath(path);
+          const slug = generateSlugFromPath(path, { start: 1 });
 
           const tocTitle = toc_tree.length > 0 ? toc_tree[0].title : '';
           const title = t ? t : tocTitle;
-
-          // create slug
-          const slug = [locale, ...splitSlug, splitName[0]]
-            .map((i) => slugify(i, { lower: true }))
-            .filter((i) => i !== 'readme')
-            .join('/');
 
           return { ...data, slug, locale, title, excerpt: `${excerpt}...` };
         })
