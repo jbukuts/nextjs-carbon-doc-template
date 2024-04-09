@@ -3,8 +3,8 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { ReactNode } from 'react';
 import UIShell from '#/components/ui/UIShell';
-import { SLUG_TREE, LOCALE_LIST } from '#/lib/velite';
-import type { Locale } from '#i18n-config';
+import { SLUG_TREE } from '#/lib/velite';
+import { Locale, SUPPORTED_LOCALES } from '#i18n-config';
 
 interface LocaleLayoutProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ interface LocaleLayoutProps {
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
 export async function generateStaticParams() {
-  return LOCALE_LIST.map((locale) => ({ locale }));
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
 /**

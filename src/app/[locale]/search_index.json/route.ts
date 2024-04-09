@@ -11,7 +11,7 @@ import slugify from 'slugify';
 import { findAfter } from 'unist-util-find-after';
 import { remove } from 'unist-util-remove';
 import { CONTINUE, visit } from 'unist-util-visit';
-import { LOCALE_LIST } from '#/lib/velite';
+import { SUPPORTED_LOCALES } from '#i18n-config';
 import { labs } from '../../../../.velite';
 
 export const dynamic = 'error';
@@ -33,7 +33,7 @@ interface SearchIndexParams {
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
 export function generateStaticParams(): SearchIndexParams[] {
-  return LOCALE_LIST.map((l) => ({ locale: l }));
+  return SUPPORTED_LOCALES.map((l) => ({ locale: l }));
 }
 
 // eslint-disable-next-line no-unused-vars

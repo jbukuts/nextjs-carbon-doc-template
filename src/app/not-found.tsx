@@ -1,7 +1,7 @@
 'use client';
 
 import { redirect, RedirectType, usePathname } from 'next/navigation';
-import { DEF_LOCALE, locales } from '#i18n-config';
+import { DEF_LOCALE, SUPPORTED_LOCALES } from '#i18n-config';
 
 /**
  * Ran when `notFound` error runs
@@ -12,6 +12,8 @@ import { DEF_LOCALE, locales } from '#i18n-config';
 export default function NotFound() {
   const pathName = usePathname();
   const locale = pathName.split('/')[1];
-  const finalLocale = locales.includes(locale as any) ? locale : DEF_LOCALE;
+  const finalLocale = SUPPORTED_LOCALES.includes(locale as any)
+    ? locale
+    : DEF_LOCALE;
   return redirect(`/${finalLocale}/not-found`, RedirectType.replace);
 }

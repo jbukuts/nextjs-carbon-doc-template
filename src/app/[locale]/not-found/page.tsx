@@ -2,7 +2,8 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import NavTile from '#/components/custom/NavTile';
 import TileGrid from '#/components/custom/TileGrid';
 import { PageHeader } from '#/components/ui';
-import { LOCALE_LIST, SLUG_TREE } from '#/lib/velite';
+import { SLUG_TREE } from '#/lib/velite';
+import { SUPPORTED_LOCALES } from '#i18n-config';
 import styles from './page.module.scss';
 
 interface FourOhFourProps {
@@ -15,7 +16,7 @@ interface FourOhFourProps {
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
 export async function generateStaticParams() {
-  return LOCALE_LIST.map((locale) => ({ locale }));
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
 /**
