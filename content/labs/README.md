@@ -9,17 +9,21 @@ This is a living example of how MDX syntax is translated into a static page with
 
 It also contains links to other documentation about the various inner workings of the site to help get a better understanding of how it works.
 
-Out-of-the-box the template is already set-up for:
+Out-of-the-box the template is already set up for:
 
 - Styling for most basic HTML-Markdown analogs like:
   - Lists (Ordered and Unordered)
   - Tables
   - Headings
-  - Codeblocks (with highlighting)
+  - Codeblocks (with highlighting via `rehype-highlight`)
 - Linting with ESLint
-  - For MDX/Markdown via `eslint-plugin-mdx` and `remark-lint` plugins
-- Unit testing setup with `velite`
-- SEO metadata based on frontmatter properties
+  - MDX/Markdown support via `eslint-plugin-mdx` and `remark-lint` plugins
+- Unit testing setup with `vitest`
+- SEO metadata based on frontmatter properties for:
+  - OpenGraph
+  - Twitter
+  - JSON-LD
+- Localization via `next-intl`
 
 ## Basic documentation
 

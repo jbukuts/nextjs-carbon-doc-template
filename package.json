@@ -54,6 +54,7 @@
   "devDependencies": {
     "@testing-library/react": "^14.2.2",
     "@types/carbon__layout": "^0.0.3",
+    "@types/carbon__themes": "^0.0.3",
     "@types/lodash": "^4.14.202",
     "@types/lunr": "^2.3.7",
     "@types/node": "^20",
