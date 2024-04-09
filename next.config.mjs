@@ -6,7 +6,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const { NEXT_PUBLIC_BASE_PATH } = process.env;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./i18n.config.ts');
 
 // const SYMLINKS = ['content', 'fragments'];
 // const IS_DEV = process.env.NODE_ENV === 'development';

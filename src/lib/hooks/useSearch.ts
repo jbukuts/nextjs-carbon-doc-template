@@ -5,7 +5,7 @@ import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SearchItem } from '#/app/[locale]/search_index.json/route';
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 /**
  * Allow for search of static from static index file

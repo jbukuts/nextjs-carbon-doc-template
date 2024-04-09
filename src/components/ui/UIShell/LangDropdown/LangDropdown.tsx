@@ -2,9 +2,9 @@ import { Dropdown } from '@carbon/react';
 import { EarthFilled } from '@carbon/react/icons';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { localeMap } from '#/i18n';
 import useSupportedLocales from '#/lib/hooks/useSupportedLocales';
 import type { SlugTree } from '#/lib/velite/generate-tree';
+import { localeMap } from '#i18n-config';
 import styles from './LangDropdown.module.scss';
 
 interface LangDropdownProps {

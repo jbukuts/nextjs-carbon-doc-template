@@ -3,8 +3,8 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { ReactNode } from 'react';
 import UIShell from '#/components/ui/UIShell';
-import type { Locale } from '#/i18n';
 import { SLUG_TREE, LOCALE_LIST } from '#/lib/velite';
+import type { Locale } from '#i18n-config';
 
 interface LocaleLayoutProps {
   children: ReactNode;

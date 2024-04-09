@@ -19,6 +19,7 @@
     ],
     "paths": {
       "#mdx-config": ["./mdx.config.mjs"],
+      "#i18n-config": ["./i18n.config.ts"],
       "#velite": ["./.velite/"],
       "#/*": ["./src/*"]
     }

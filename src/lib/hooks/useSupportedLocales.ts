@@ -1,8 +1,8 @@
 import get from 'lodash/get';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import type { Locale } from '#/i18n';
 import type { SlugTree } from '#/lib/velite/generate-tree';
+import type { Locale } from '#i18n-config';
 
 interface SupportedLocale {
   locale: Locale;

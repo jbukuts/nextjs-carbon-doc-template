@@ -1,7 +1,7 @@
 'use client';
 
 import { redirect, RedirectType, usePathname } from 'next/navigation';
-import { DEF_LOCALE, locales } from '#/i18n';
+import { DEF_LOCALE, locales } from '#i18n-config';
 
 /**
  * Ran when `notFound` error runs
