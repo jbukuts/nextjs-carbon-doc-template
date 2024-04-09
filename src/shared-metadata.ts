@@ -3,7 +3,12 @@ import 'server-only';
 import merge from 'lodash/merge';
 import type { Metadata } from 'next';
 
-const { PORT = 3000, NODE_ENV, VERCEL_URL } = process.env;
+const {
+  PORT = 3000,
+  NODE_ENV,
+  VERCEL_URL,
+  NEXT_PUBLIC_BASE_PATH = ''
+} = process.env;
 const IS_DEV = NODE_ENV === 'development';
 
 const siteData = {
@@ -15,7 +20,9 @@ const siteData = {
 
 const baseMetadata: Metadata = {
   metadataBase: new URL(
-    IS_DEV ? `http://localhost:${PORT}` : `https://${VERCEL_URL}`
+    IS_DEV
+      ? `http://localhost:${PORT}`
+      : `https://${VERCEL_URL}${NEXT_PUBLIC_BASE_PATH}`
   ),
   title: siteData.title,
   description: siteData.description,

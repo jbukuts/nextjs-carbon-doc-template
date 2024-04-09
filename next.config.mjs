@@ -1,8 +1,12 @@
 // import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const { NEXT_PUBLIC_BASE_PATH } = process.env;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const withNextIntl = createNextIntlPlugin();
 
 // const SYMLINKS = ['content', 'fragments'];
 // const IS_DEV = process.env.NODE_ENV === 'development';
@@ -29,6 +33,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: NEXT_PUBLIC_BASE_PATH,
   output: 'export',
   images: {
     // loader: 'custom',
@@ -40,10 +45,10 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       sharp$: false,
-      'onnxruntime-node$': false,
+      'onnxruntime-node$': false
       // manually do this
       // https://github.com/amannn/next-intl/blob/78f88d1493eb796498b7fb2c986536ac49cffda0/packages/next-intl/src/plugin.tsx#L95
-      'next-intl/config': path.resolve(config.context, './src/i18n.ts')
+      // 'next-intl/config': path.resolve(config.context, './src/i18n.ts')
     };
 
     return config;
@@ -78,4 +83,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
