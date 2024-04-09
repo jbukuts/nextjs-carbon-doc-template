@@ -8,6 +8,15 @@
       background-color: themes.$field-hover-01;
     }
   }
+
+  @include resources.apply-lesser-than('md') {
+    & :global(.cds--list-box__menu-item__option) {
+      text-overflow: clip;
+      max-width: layout.to-rem(18px);
+      padding-right: 0;
+      text-transform: uppercase;
+    }
+  }
 }
 
 .selectedItem {
