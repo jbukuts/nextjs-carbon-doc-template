@@ -1,10 +1,11 @@
 'use client';
 
 import MiniSearch, { SearchResult } from 'minisearch';
+import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SearchItem } from '#/app/[locale]/search_index.json/route';
 
-const { NEXT_PUBLIC_BASE_PATH = '' } = process.env;
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 /**
  * Allow for search of static from static index file
@@ -14,12 +15,15 @@ export default function useSearch() {
   const [searchIndex, setIndex] = useState<MiniSearch>();
   const [searchText, setSearchText] = useState<string>('');
   const [results, setResults] = useState<SearchResult[]>([]);
+  const locale = useLocale();
 
   useEffect(() => {
-    if (searchIndex) return;
+    if (!locale) return;
 
     // load preindexed file from route
-    fetch(`${NEXT_PUBLIC_BASE_PATH}/en/search_index.json`).then(async (r) => {
+    fetch(`${BASE_PATH}/en/search_index.json`).then(async (r) => {
+      if (r.status !== 200) return;
+
       const serialIdx = await r.text();
       const idx = MiniSearch.loadJSON<SearchItem>(serialIdx, {
         fields: ['title', 'text'],
@@ -28,7 +32,7 @@ export default function useSearch() {
 
       setIndex(idx);
     });
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     if (!searchText || !searchIndex) {
