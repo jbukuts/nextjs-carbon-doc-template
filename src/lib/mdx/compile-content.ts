@@ -6,8 +6,9 @@ import mdxConfig from '#mdx-config';
 import { SLUG_MAP, collectBreadcrumbs } from '../velite';
 import shortcodes from './shortcodes';
 
-const { remarkPlugins: defRemarkPlugins, rehypePlugins: defRehypePlugins } =
-  mdxConfig;
+const {
+  plugins: { remarkPlugins: defRemarkPlugins, rehypePlugins: defRehypePlugins }
+} = mdxConfig;
 
 type ComponentMap = MDXRemoteProps['components'];
 

@@ -7,7 +7,9 @@ import { remarkImage, remarkLocalizeLinks } from '#/lib/plugins/remark';
 import mdxConfig from '#mdx-config';
 import { fragments } from '../../../../.velite';
 
-const { remarkPlugins, rehypePlugins } = mdxConfig;
+const {
+  plugins: { remarkPlugins, rehypePlugins }
+} = mdxConfig;
 
 interface FragmentLoaderProps {
   name: string;

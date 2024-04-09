@@ -4,7 +4,7 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkLintFrontmatterSchema from 'remark-lint-frontmatter-schema';
 import mdxConfig from './mdx.config.mjs'
 
-const { frontmatterSchema } = mdxConfig;
+const { schemas: { labs } } = mdxConfig;
 
 const config = {
   settings: {},
@@ -24,7 +24,7 @@ const config = {
     ["remark-lint-list-item-indent", [2, 'space']],
     // ["remark-lint-list-item-spacing", ["error"]],
     remarkFrontmatter,
-    [remarkLintFrontmatterSchema, ['error', { embed: frontmatterSchema }]],
+    [remarkLintFrontmatterSchema, ['error', { embed: labs }]],
   ]
 }
 

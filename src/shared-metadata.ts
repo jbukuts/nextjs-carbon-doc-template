@@ -15,7 +15,7 @@ const siteData = {
   title: 'Carbon Next.js Template',
   description:
     'Documentation style site template for Next.js and Carbon Design',
-  image: '/vercel.svg'
+  image: '/rebus.jpg'
 };
 
 const baseMetadata: Metadata = {
