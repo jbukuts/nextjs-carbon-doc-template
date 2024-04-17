@@ -11,7 +11,12 @@ export default function SmartLink(props: SmartLinkProps) {
   const { href = '', children } = props;
 
   const isRelativeLink = isURLRelative(href);
+  const isHashRoute = href.startsWith('#');
 
   const El: React.ElementType = isRelativeLink ? NextLink : 'a';
-  return createElement(El, { className: styles.link, href }, children);
+  return createElement(
+    El,
+    { className: styles.link, href, replace: isHashRoute ? true : undefined },
+    children
+  );
 }
