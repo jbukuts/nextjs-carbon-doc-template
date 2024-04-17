@@ -23,7 +23,7 @@ export interface SlugTree {
 export default function generateSlugTree(): SlugTree {
   const tree: SlugTree['children'] = {};
 
-  const sorted = labs.toSorted((a, b) => a.slug.localeCompare(b.slug));
+  const sorted = labs.sort((a, b) => a.slug.localeCompare(b.slug));
 
   for (const item of sorted) {
     const { slug } = item;

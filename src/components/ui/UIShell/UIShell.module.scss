@@ -1,8 +1,15 @@
 $indent: layout.$spacing-05;
 
 .sideBar {
-  border-right: 1px solid themes.$border-subtle-00;
   background-color: themes.$layer-01;
+
+  &:global(.cds--side-nav--expanded) {
+    border-right: 1px solid themes.$border-subtle-00;
+  }
+
+  @include resources.apply-greater-than('lg') {
+    border-right: 1px solid themes.$border-subtle-00;
+  }
 }
 
 .switcherItem {

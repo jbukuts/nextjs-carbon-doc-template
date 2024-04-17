@@ -28,6 +28,8 @@ interface UIShellProps {
   sideBarTree: SlugTree;
 }
 
+const THEME_MAP = { light: 'cds--white', dark: 'cds--g100' };
+
 export default function UIShell(props: UIShellProps) {
   const { children, sideBarTree } = props;
   const [showSideNav, setShowSideNav] = useState(true);
@@ -40,8 +42,8 @@ export default function UIShell(props: UIShellProps) {
     <ThemeProvider
       disableTransitionOnChange
       attribute='class'
-      value={{ light: 'cds--white', dark: 'cds--g100' }}
-      themes={['light', 'dark']}>
+      value={THEME_MAP}
+      themes={Object.keys(THEME_MAP)}>
       <Header className={styles.header} aria-label='header'>
         <HeaderMenuButton
           className={styles.headerButton}
