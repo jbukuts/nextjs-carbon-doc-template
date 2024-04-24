@@ -1,18 +1,32 @@
 'use client';
 
 import { ExpandableSearch } from '@carbon/react';
-import { Document } from '@carbon/react/icons';
+import { Document, TextAlignLeft } from '@carbon/react/icons';
+import cx from 'classnames';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import useSearch from '#/lib/hooks/useSearch';
+import useSearch, { CustSearchResult } from '#/lib/hooks/useSearch';
 import styles from './SearchBar.module.scss';
+
+type SearchMap = Record<string, CustSearchResult[]>;
 
 export default function SearchBar() {
   const { results, searchText, setSearchText } = useSearch();
   const [expanded, setExpanded] = useState<boolean>(false);
 
+  const [resultsMap, setResultsMap] = useState<SearchMap>({});
+
   useEffect(() => {
     console.log(results);
+
+    const t = results.reduce((acc, curr) => {
+      const { page } = curr;
+      if (acc[page] === undefined) acc[page] = [];
+      acc[page].push(curr);
+      return acc;
+    }, {} as SearchMap);
+
+    setResultsMap(t);
   }, [results]);
 
   return (
@@ -39,21 +53,40 @@ export default function SearchBar() {
           <div className={styles.resultsAmount}>
             {results.length} results found
           </div>
-          {results.length > 0 &&
-            results.map((r) => {
+          {resultsMap &&
+            Object.keys(resultsMap).map((k, idx) => {
+              const items = resultsMap[k];
+
               return (
-                <Link
-                  onClick={() => setExpanded(false)}
-                  href={`${r.location}:~:text=${encodeURI(searchText)}`}
-                  key={r.id}
-                  className={styles.searchResult}>
-                  <span className={styles.resultTitle}>
-                    <Document />
-                    {r.title}
-                  </span>
-                  {/* <div dangerouslySetInnerHTML={{ __html: r.text }} /> */}
-                  {/* <div>{r.text}</div> */}
-                </Link>
+                <div
+                  key={idx}
+                  style={{ display: 'flex', flexDirection: 'column' }}>
+                  <Link
+                    onClick={() => setExpanded(false)}
+                    href={`/`}
+                    key={`res-${idx}`}
+                    className={styles.searchResult}>
+                    <span className={styles.resultTitle}>
+                      <Document />
+                      {k}
+                    </span>
+                  </Link>
+                  {items.map((r) => {
+                    return (
+                      <Link
+                        onClick={() => setExpanded(false)}
+                        href={`${r.location}:~:text=${encodeURI(searchText)}`}
+                        key={r.id}
+                        className={styles.searchResult}>
+                        <span
+                          className={cx(styles.subItem, styles.resultTitle)}>
+                          <TextAlignLeft />
+                          {r.title}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
               );
             })}
         </div>

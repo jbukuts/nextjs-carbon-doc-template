@@ -5,6 +5,7 @@
   align-items: flex-end;
   max-width: layout.to-rem(500px);
   flex-grow: 1;
+  
 }
 
 .searchBar {
@@ -21,6 +22,7 @@
 }
 
 .resultsWrapper {
+  box-sizing: content-box;
   position: absolute;
   top: 100%;
   max-height: min(100vh, layout.to-rem(600px));
@@ -46,6 +48,8 @@
   padding: layout.$spacing-04;
   transition: background-color 100ms linear;
   user-select: none;
+  height: fit-content;
+  position: relative;
 
   & .resultTitle {
     font-weight: bold;
@@ -54,6 +58,11 @@
     gap: layout.$spacing-03;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  & .subItem {
+    margin-left: calc(layout.$spacing-03);
+    //border-left: 1px solid red;
   }
 
   &:hover {

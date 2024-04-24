@@ -5,6 +5,10 @@ import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SearchItem } from '#/app/[locale]/search_index.json/route';
 
+export interface CustSearchResult extends SearchResult {
+  page: string;
+}
+
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 /**
@@ -12,9 +16,9 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
  * @returns Object containing helper items for search
  */
 export default function useSearch() {
-  const [searchIndex, setIndex] = useState<MiniSearch>();
+  const [searchIndex, setIndex] = useState<MiniSearch<SearchItem>>();
   const [searchText, setSearchText] = useState<string>('');
-  const [results, setResults] = useState<SearchResult[]>([]);
+  const [results, setResults] = useState<CustSearchResult[]>([]);
   const locale = useLocale();
 
   useEffect(() => {
@@ -27,7 +31,7 @@ export default function useSearch() {
       const serialIdx = await r.text();
       const idx = MiniSearch.loadJSON<SearchItem>(serialIdx, {
         fields: ['title', 'text'],
-        storeFields: ['title', 'text', 'location']
+        storeFields: ['title', 'text', 'location', 'page']
       });
 
       setIndex(idx);
@@ -40,7 +44,7 @@ export default function useSearch() {
       return;
     }
     const r = searchIndex.search(searchText);
-    setResults(r);
+    setResults(r as CustSearchResult[]);
   }, [searchText]);
 
   return {

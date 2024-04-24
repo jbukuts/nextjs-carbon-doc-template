@@ -18,6 +18,7 @@ export const dynamic = 'error';
 
 export interface SearchItem {
   id: number;
+  page: string;
   title: string;
   text: string;
   location: string;
@@ -58,7 +59,7 @@ function generateLunrIndex(docs: SearchItem[]) {
 function generateMiniSearchIndex(docs: SearchItem[]) {
   const idx = new MiniSearch<SearchItem>({
     fields: ['title', 'text'],
-    storeFields: ['title', 'text', 'location']
+    storeFields: ['title', 'text', 'location', 'page']
   });
 
   idx.addAll(docs);
@@ -80,7 +81,7 @@ export async function GET(
   let c = 0;
   const docs: SearchItem[] = [];
   for (const lab of labs.filter((l) => l.locale === locale)) {
-    const { raw, slug } = lab;
+    const { raw, slug, title: pageTitle } = lab;
 
     const tree = fromMarkdown(raw);
 
@@ -126,6 +127,7 @@ export async function GET(
 
       docs.push({
         id: c,
+        page: pageTitle,
         title,
         text: content,
         location: `/${slug}#${slugify(title, { lower: true })}`
