@@ -2,6 +2,7 @@
 
 import {
   Header,
+  HeaderGlobalAction,
   HeaderGlobalBar,
   HeaderMenuButton,
   HeaderName,
@@ -9,10 +10,9 @@ import {
   SideNavDivider,
   SideNavItems
 } from '@carbon/react';
-import { Home } from '@carbon/react/icons';
+import { Home, UserProfile } from '@carbon/react/icons';
 import { useLocale, useTranslations } from 'next-intl';
-import { ThemeProvider } from 'next-themes';
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { SlugTree } from '#/lib/velite/generate-tree';
 import CustomSideNavItem from './CustomSideNavItem';
 import Footer from './Footer';
@@ -26,24 +26,25 @@ import styles from './UIShell.module.scss';
 interface UIShellProps {
   children: ReactNode;
   sideBarTree: SlugTree;
+  lang: string;
 }
 
-const THEME_MAP = { light: 'cds--white', dark: 'cds--g100' };
-
 export default function UIShell(props: UIShellProps) {
-  const { children, sideBarTree } = props;
-  const [showSideNav, setShowSideNav] = useState(true);
+  const { children, sideBarTree, lang } = props;
+  const [showSideNav, setShowSideNav] = useState(false);
   const currentLocale = useLocale();
   const t = useTranslations('UIShell');
+  const sidebarRef = useRef<HTMLElement>(null);
 
   const toggleSideBar = () => setShowSideNav((o) => !o);
 
+  useEffect(() => {
+    // internal breakpoint check doesn't work within sidebar for dev
+    sidebarRef.current?.removeAttribute('inert');
+  }, []);
+
   return (
-    <ThemeProvider
-      disableTransitionOnChange
-      attribute='class'
-      value={THEME_MAP}
-      themes={Object.keys(THEME_MAP)}>
+    <>
       <Header className={styles.header} aria-label='header'>
         <HeaderMenuButton
           className={styles.headerButton}
@@ -56,18 +57,21 @@ export default function UIShell(props: UIShellProps) {
         <HeaderName prefix='Carbon'>Next.js Template</HeaderName>
         <HeaderGlobalBar>
           <SearchBar />
-          <ToggleThemeAction />
           <LangDropdown sideBarTree={sideBarTree} />
+          <ToggleThemeAction />
+          <HeaderGlobalAction tooltipAlignment='end' aria-label='Profile'>
+            <UserProfile />
+          </HeaderGlobalAction>
         </HeaderGlobalBar>
 
         <SideNav
-          isPersistent
-          isChildOfHeader
+          ref={sidebarRef}
           expanded={showSideNav}
           onOverlayClick={toggleSideBar}
-          onSideNavBlur={toggleSideBar}
+          aria-label={t('SideNav.label')}
           className={styles.sideBar}
-          aria-label={t('SideNav.label')}>
+          isPersistent
+          isChildOfHeader>
           <SideNavItems>
             <CustomSideNavItem href={`/${currentLocale}`} renderIcon={Home}>
               Home
@@ -81,9 +85,9 @@ export default function UIShell(props: UIShellProps) {
       </Header>
 
       <ResponsiveContent className={styles.content} as='div'>
-        <main>{children}</main>
+        <main lang={lang}>{children}</main>
         <Footer />
       </ResponsiveContent>
-    </ThemeProvider>
+    </>
   );
 }

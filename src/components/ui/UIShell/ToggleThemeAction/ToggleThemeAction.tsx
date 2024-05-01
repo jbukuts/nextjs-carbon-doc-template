@@ -1,3 +1,5 @@
+'use theme';
+
 import { HeaderGlobalAction } from '@carbon/react';
 import { AsleepFilled, LightFilled } from '@carbon/react/icons';
 import { useTranslations } from 'next-intl';

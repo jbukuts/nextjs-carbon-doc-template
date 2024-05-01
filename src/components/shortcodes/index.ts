@@ -13,7 +13,7 @@ import Table, {
   TableHeadData
 } from './Table';
 
-const { QuizAlert, Danger, Warning } = callouts;
+const { QuizAlert, Danger, Warning, Persona, Callout } = callouts;
 
 export {
   Image,
@@ -26,11 +26,13 @@ export {
   QuizAlert,
   Danger,
   Warning,
+  Callout,
   Link,
   TableRow,
   TableBody,
   TableData,
   TableHead,
   TableHeadData,
-  Heading
+  Heading,
+  Persona
 };

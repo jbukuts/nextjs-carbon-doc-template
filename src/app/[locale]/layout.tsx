@@ -1,5 +1,6 @@
 import pick from 'lodash/pick';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { ReactNode } from 'react';
 import UIShell from '#/components/ui/UIShell';
@@ -25,7 +26,7 @@ export async function generateStaticParams() {
  *
  * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router#static-rendering
  */
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params: { locale }
 }: Readonly<LocaleLayoutProps>) {
@@ -36,16 +37,14 @@ export default function LocaleLayout({
    *
    * @see https://next-intl-docs.vercel.app/docs/environments/server-client-components#option-3-providing-individual-messages
    */
-  const messages = useMessages();
+  const messages = await getMessages();
 
   return (
-    <body lang={locale}>
-      <NextIntlClientProvider
-        messages={pick(messages, ['UIShell', 'components'])}>
-        <UIShell sideBarTree={SLUG_TREE}>
-          <div className='page-wrapper'>{children}</div>
-        </UIShell>
-      </NextIntlClientProvider>
-    </body>
+    <NextIntlClientProvider
+      messages={pick(messages, ['UIShell', 'components'])}>
+      <UIShell sideBarTree={SLUG_TREE} lang={locale}>
+        <div className='page-wrapper'>{children}</div>
+      </UIShell>
+    </NextIntlClientProvider>
   );
 }

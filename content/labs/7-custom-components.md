@@ -45,16 +45,51 @@ Results in:
 
 ### Warning
 
+```md
+<Warning text='Using the `text` prop with MD syntax will not **any** apply styling!'/>
+```
+
 <Warning text='Using the `text` prop with MD syntax will not **any** apply styling!'/>
 
 ### Danger
+
+```md
+<Danger>
+However, using MD syntax as the `children` prop will style them properly.
+
+You can nest **_styling_** all you want.
+</Danger>
+```
 
 <Danger>
 However, using MD syntax as the `children` prop will style them properly.
 
 You can nest **_styling_** all you want.
-
 </Danger>
+
+### Persona
+
+```md
+<Persona>
+**Heads up**: For this lab you will be acting as a System Administrator within an watsonx.data environment.
+</Persona>
+```
+
+<Persona>
+**Heads up**: For this lab you will be acting as a System Administrator within an watsonx.data environment.
+</Persona>
+
+### Generic
+
+```md
+<Callout>
+generic callout
+</Callout>
+```
+
+<Callout>
+generic callout
+</Callout>
 
 ### Blockquote
 
@@ -63,5 +98,3 @@ You can nest **_styling_** all you want.
 ```
 
 > BlockQuote uses the standard blockquote selector `>` in Markdown. So nested styling is supported easily.
-
-lets see if this works

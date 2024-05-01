@@ -1,0 +1,24 @@
+
+
+.container {
+  padding: layout.$spacing-05;
+}
+
+.title {
+  background-color:  themes.$layer-01;
+  border-bottom: 1px solid themes.$border-subtle-00;
+  padding: layout.$spacing-05;
+  padding-top: layout.$spacing-13;
+
+  & h1 {
+    @include type.type-style('heading-07');
+
+    & b {
+      font-weight: bold;
+    }
+  }
+}
+
+.fold {
+  padding: layout.$spacing-05;
+}

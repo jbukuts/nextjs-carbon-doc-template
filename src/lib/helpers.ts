@@ -145,3 +145,20 @@ export function toHoursAndMinutes(totalMinutes: number) {
 
   return `${formattedHours} ${formattedMin}`.trim();
 }
+
+/**
+ * Turn URLSearchParams item into JS object
+ *
+ * @param {URLSearchParams} params
+ * @returns object containing key-value pairs
+ */
+export function searchParamsToObject(params: URLSearchParams) {
+  return Array.from(params.entries()).reduce(
+    (acc, curr) => {
+      const [key, val] = curr;
+      acc[key] = val;
+      return acc;
+    },
+    {} as Record<string, string | undefined>
+  );
+}

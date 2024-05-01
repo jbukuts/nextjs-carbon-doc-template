@@ -21,7 +21,9 @@ import {
   QuizAlert,
   Warning,
   Danger,
-  Heading
+  Heading,
+  Persona,
+  Callout
 } from '#/components/shortcodes';
 
 type ComponentMap = MDXRemoteProps['components'];
@@ -59,6 +61,8 @@ const shortcodes: ComponentMap = {
   QuizAlert: QuizAlert,
   Warning: Warning,
   Danger: Danger,
+  Persona: Persona,
+  Callout: Callout,
   TokenizationApplet: LazyComp('TokenizationApplet'),
   NavTile: NavTile,
   TileGrid: TileGrid,

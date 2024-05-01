@@ -34,7 +34,7 @@ const withNextIntl = createNextIntlPlugin('./i18n.config.ts');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: NEXT_PUBLIC_BASE_PATH,
-  output: 'export',
+  // output: 'export',
   images: {
     // loader: 'custom',
     // loaderFile: './src/lib/image-loader.ts',
