@@ -3,7 +3,7 @@ import BlockQuote from '../BlockQuote';
 import type { BlockQuoteProps } from '../BlockQuote/BlockQuote';
 
 type AllowedType = BlockQuoteProps['type'];
-type CalloutType = 'QuizAlert' | 'Danger' | 'Warning';
+type CalloutType = 'QuizAlert' | 'Danger' | 'Warning' | 'Persona' | 'Callout';
 
 interface GenericCalloutProps {
   text?: string;
@@ -17,7 +17,9 @@ type CalloutProps = Omit<GenericCalloutProps, 'type'>;
 const calloutMap: Record<CalloutType, AllowedType> = {
   QuizAlert: 'success',
   Danger: 'error',
-  Warning: 'warning'
+  Warning: 'warning',
+  Persona: 'caution-undefined',
+  Callout: 'default'
 };
 
 const GenericCallout = (props: GenericCalloutProps) => {
