@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { IntlErrorCode } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 
 export type Locale = 'en' | 'es';
@@ -15,6 +16,15 @@ export default getRequestConfig(async ({ locale }) => {
   if (!SUPPORTED_LOCALES.includes(locale as any)) notFound();
 
   return {
-    messages: (await import(`./translations/${locale}.json`)).default
+    messages: (await import(`./translations/${locale}.json`)).default,
+    // https://next-intl-docs.vercel.app/docs/usage/configuration#error-handling
+    onError(error) {
+      if (error.code === IntlErrorCode.MISSING_MESSAGE) {
+        console.error(error.originalMessage);
+      }
+    },
+    getMessageFallback() {
+      return '';
+    }
   };
 });

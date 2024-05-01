@@ -39,22 +39,81 @@ Let's take a look at each of them in action with different props applied.
 <QuizAlert />
 ```
 
-Results in:
-
 <QuizAlert/>
 
+```md
+<QuizAlert text="Prop testing"/>
+```
+
+<QuizAlert text="Prop testing"/>
+
+```md
+<QuizAlert>
+Children **testing**
+</QuizAlert>
+```
+
+<QuizAlert>
+Children **testing**
+</QuizAlert>
+
 ### Warning
+
+```md
+<Warning text='Using the `text` prop with MD syntax will not **any** apply styling!'/>
+```
 
 <Warning text='Using the `text` prop with MD syntax will not **any** apply styling!'/>
 
 ### Danger
 
+```md
 <Danger>
 However, using MD syntax as the `children` prop will style them properly.
 
 You can nest **_styling_** all you want.
-
 </Danger>
+```
+
+<Danger>
+However, using MD syntax as the `children` prop will style them properly.
+
+You can nest **_styling_** all you want.
+</Danger>
+
+```md
+<Danger text="Text here">
+Children here
+</Danger>
+```
+
+<Danger text="Text here">
+Children here
+</Danger>
+
+### Persona
+
+```md
+<Persona>
+For this lab you will be acting as a System Administrator
+</Persona>
+```
+
+<Persona>
+For this lab you will be acting as a System Administrator
+</Persona>
+
+### Generic
+
+```md
+<Callout>
+A generic callout
+</Callout>
+```
+
+<Callout>
+A generic callout
+</Callout>
 
 ### Blockquote
 
@@ -63,5 +122,3 @@ You can nest **_styling_** all you want.
 ```
 
 > BlockQuote uses the standard blockquote selector `>` in Markdown. So nested styling is supported easily.
-
-lets see if this works

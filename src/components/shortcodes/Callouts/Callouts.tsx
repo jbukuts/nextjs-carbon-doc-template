@@ -1,9 +1,10 @@
+import { useTranslations } from 'next-intl';
 import React, { ReactNode } from 'react';
 import BlockQuote from '../BlockQuote';
 import type { BlockQuoteProps } from '../BlockQuote/BlockQuote';
 
 type AllowedType = BlockQuoteProps['type'];
-type CalloutType = 'QuizAlert' | 'Danger' | 'Warning';
+type CalloutType = 'QuizAlert' | 'Danger' | 'Warning' | 'Persona' | 'Callout';
 
 interface GenericCalloutProps {
   text?: string;
@@ -17,7 +18,9 @@ type CalloutProps = Omit<GenericCalloutProps, 'type'>;
 const calloutMap: Record<CalloutType, AllowedType> = {
   QuizAlert: 'success',
   Danger: 'error',
-  Warning: 'warning'
+  Warning: 'warning',
+  Persona: 'caution-undefined',
+  Callout: 'default'
 };
 
 const GenericCallout = (props: GenericCalloutProps) => {
@@ -29,12 +32,20 @@ const GenericCallout = (props: GenericCalloutProps) => {
 const callouts = Object.entries(calloutMap).reduce(
   (acc, curr) => {
     const [key, val] = curr;
-    acc[key as CalloutType] = ({ text, children }) => (
-      <GenericCallout type={val} text={text}>
-        {children}
-      </GenericCallout>
-    );
 
+    const Comp: React.FC<CalloutProps> = ({ text, children }) => {
+      const t = useTranslations(`components.${key}`);
+
+      return (
+        <GenericCallout
+          type={val}
+          text={!children && !text ? t('defaultText') : text}>
+          {children}
+        </GenericCallout>
+      );
+    };
+
+    acc[key as CalloutType] = Comp;
     return acc;
   },
   {} as Record<CalloutType, React.FC<CalloutProps>>

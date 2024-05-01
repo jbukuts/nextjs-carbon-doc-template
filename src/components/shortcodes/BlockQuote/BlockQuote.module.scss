@@ -2,7 +2,7 @@
 @use 'sass:color';
 // @use '@carbon/themes';
 
-$blockStyles: "info", "success", "warning", "error";
+$blockStyles: "info", "success", "warning", "error", "caution-undefined";
 
 :export {
   types: $blockStyles
@@ -31,17 +31,29 @@ $blockStyles: "info", "success", "warning", "error";
   gap: layout.$spacing-05;
 }
 
+.default {
+  border-color: themes.$text-primary;
+  border-style: solid;
+  border-width: 1px;
+  border-left-width: 5px;
+  background-color: themes.get_token('text-primary', 0.175);
+}
+
 @each $name in $blockStyles {
   .#{$name} {
-    $bg-color: themes.get_token('support-#{$name}-inverse', 0.25);
+    $bg-color: themes.get_token('support-#{$name}', 0.25);
     $border-color: themes.get_token('support-#{$name}', 0.75);
 
-    border: 1px solid $border-color;
-    border-left-width: 5px;
+    border-color: $border-color;
     background-color: $bg-color;
 
     & svg {
       fill: themes.get_token('support-#{$name}');
+    }
+
+    & code {
+      background-color: $bg-color !important;
+      border-color: $border-color;
     }
   }
 }
