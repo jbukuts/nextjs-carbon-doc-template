@@ -1,12 +1,13 @@
 @use 'sass:list';
 
 $input-height: 12rem;
-$border-color: themes.$border-subtle-02;
+$border-color: themes.$border-subtle-00;
 
-$chunk-colors: "info", "success", "error", "caution-undefined", "warning", "caution-major", "info";
+$chunk-colors: 'info', 'success', 'error', 'caution-undefined', 'warning',
+  'caution-major', 'info';
 
 :export {
-  colorsLength: list.length($chunk-colors)
+  colorsLength: list.length($chunk-colors);
 }
 
 .container {
@@ -58,7 +59,7 @@ $chunk-colors: "info", "success", "error", "caution-undefined", "warning", "caut
 
 .chunk {
   border-radius: 5px;
-  padding: 0 .25rem;
+  padding: 0 0.25rem;
   height: fit-content;
   width: fit-content;
   margin: 0 !important;
@@ -69,7 +70,7 @@ $chunk-colors: "info", "success", "error", "caution-undefined", "warning", "caut
     &_#{$index - 1} {
       $bg-color: themes.get_token('support-#{$value}', 0.175);
       $border-c: themes.get_token('support-#{$value}');
-      
+
       color: $border-c;
       border: 1px solid $border-c;
       background-color: $bg-color;

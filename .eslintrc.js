@@ -57,6 +57,9 @@ module.exports = {
       // globals: getGlobals(shortcodes),
       rules: {
         indent: ['off'],
+        // 'react/jsx-no-undef': [1, { allowGlobals: true }],
+        'react/jsx-no-undef': 'off',
+        'react/no-unescaped-entities': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.md', '.mdx'] }]
       },
       extends: 'plugin:mdx/recommended',

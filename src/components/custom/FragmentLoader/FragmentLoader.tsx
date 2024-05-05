@@ -1,3 +1,5 @@
+import 'server-only';
+
 import path from 'path';
 import { getLocale } from 'next-intl/server';
 import { compileMDX } from 'next-mdx-remote/rsc';

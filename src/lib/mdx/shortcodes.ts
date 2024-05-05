@@ -3,7 +3,16 @@ import 'server-only';
 import dynamic from 'next/dynamic';
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { createElement } from 'react';
-import { NavTile, TileGrid, FragmentLoader } from '#/components/custom';
+import {
+  NavTile,
+  TileGrid,
+  FragmentLoader,
+  Tab,
+  Tabs,
+  TabPanel,
+  TabPanels,
+  TabList
+} from '#/components/custom';
 import {
   TableHead,
   TableBody,
@@ -67,7 +76,12 @@ const shortcodes: ComponentMap = {
   NavTile: NavTile,
   TileGrid: TileGrid,
   WatsonxResources: () =>
-    createElement(FragmentLoader, { name: 'fragment-test' })
+    createElement(FragmentLoader, { name: 'fragment-test' }),
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel
 };
 
 export default shortcodes;

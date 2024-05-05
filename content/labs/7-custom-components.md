@@ -12,6 +12,71 @@ In this document is a list of the custom components available for use within you
 
 All source code for these components can be found within `src/components/shortcodes`.
 
+## Tabs
+
+Built off the `Tabs` components from Carbon. Some built-in logic has been added to account for layers.
+https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/jsx-no-undef.md
+
+````md
+<Tabs>
+    <TabList aria-label="List of tabs">
+      <Tab>One</Tab>
+      <Tab>Two</Tab>
+      <Tab>Three</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        Some code in a tab.
+
+        Notice how it's background uses the proper layer attribute.
+
+        ```ts
+        const test = 'test';
+        console.log(test);
+        ```
+      </TabPanel>
+      <TabPanel>
+        **Some text** that is _styled_
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+    </TabPanels>
+
+</Tabs>
+````
+
+<Tabs>
+    <TabList aria-label="List of tabs">
+      <Tab>Code</Tab>
+      <Tab>Callouts</Tab>
+      <Tab>Table</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        Notice how it's background uses the proper layer attribute. This is automatic.
+        ```ts
+        const test = 'test';
+        console.log(test);
+        ```
+      </TabPanel>
+      <TabPanel>
+        > A blockquote with some `code`
+        <Danger text="With some text" />
+        <Warning>
+          And a **warning**
+        </Warning>
+        <QuizAlert/>
+      </TabPanel>
+      <TabPanel>
+        Tables also account for layer depth.
+        | one | two |
+        |-----|-----|
+        | a   | b   |
+        | c   | d   |
+      </TabPanel>
+    </TabPanels>
+
+</Tabs>
+
 ## Tokenization Applet
 
 The `TokenizationApplet` is an interactive component that shows off the transformation from text to tokens. It is built off of `@xenova/transformers` package which in turn is built off of Hugging Face's `transformers` package in Python.
@@ -39,13 +104,13 @@ Let's take a look at each of them in action with different props applied.
 <QuizAlert />
 ```
 
-<QuizAlert/>
+<QuizAlert />
 
 ```md
 <QuizAlert text="Prop testing"/>
 ```
 
-<QuizAlert text="Prop testing"/>
+<QuizAlert text='Prop testing' />
 
 ```md
 <QuizAlert>
@@ -53,9 +118,7 @@ Children **testing**
 </QuizAlert>
 ```
 
-<QuizAlert>
-Children **testing**
-</QuizAlert>
+<QuizAlert>Children **testing**</QuizAlert>
 
 ### Warning
 
@@ -63,7 +126,7 @@ Children **testing**
 <Warning text='Using the `text` prop with MD syntax will not **any** apply styling!'/>
 ```
 
-<Warning text='Using the `text` prop with MD syntax will not **any** apply styling!'/>
+<Warning text='Using the `text` prop with MD syntax will not **any** apply styling!' />
 
 ### Danger
 
@@ -79,6 +142,7 @@ You can nest **_styling_** all you want.
 However, using MD syntax as the `children` prop will style them properly.
 
 You can nest **_styling_** all you want.
+
 </Danger>
 
 ```md
@@ -87,9 +151,7 @@ Children here
 </Danger>
 ```
 
-<Danger text="Text here">
-Children here
-</Danger>
+<Danger text='Text here'>Children here</Danger>
 
 ### Persona
 
@@ -99,9 +161,7 @@ For this lab you will be acting as a System Administrator
 </Persona>
 ```
 
-<Persona>
-For this lab you will be acting as a System Administrator
-</Persona>
+<Persona>For this lab you will be acting as a System Administrator</Persona>
 
 ### Generic
 
@@ -111,9 +171,7 @@ A generic callout
 </Callout>
 ```
 
-<Callout>
-A generic callout
-</Callout>
+<Callout>A generic callout</Callout>
 
 ### Blockquote
 

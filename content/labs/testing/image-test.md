@@ -10,9 +10,9 @@ timeToComplete: 2
 Image syntax can we used like in GitHub flavored Markdown like so:
 
 ```md
-![image test](./image/sceenshot.png)
+![image test](../testing/images/screenshot.png)
 ```
 
 This code results in an image displaying like so:
 
-![image test](./images/screenshot.png)
+![image test](../testing/images/screenshot.png)

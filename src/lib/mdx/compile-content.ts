@@ -49,7 +49,7 @@ export default async function compileContent(
   } = item;
 
   const { dir } = path.parse(file_path);
-  const imagePath = path.normalize(dir);
+  const imagePath = path.join('content', path.normalize(dir));
 
   const { content } = await compileMDX({
     source: raw,
