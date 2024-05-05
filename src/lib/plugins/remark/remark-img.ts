@@ -6,7 +6,7 @@ import { isURLRelative } from '#/lib/helpers';
 const IS_DEV = process.env.NODE_ENV === 'development';
 const START_URL = IS_DEV
   ? '/'
-  : 'https://raw.githubusercontent.com/ibm-build-lab/VAD-VAR-Workshop/main/';
+  : 'https://raw.githubusercontent.com/jbukuts/nextjs-carbon-doc-template/main/';
 
 interface Options {
   prepend: string;
