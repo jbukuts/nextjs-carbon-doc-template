@@ -20,27 +20,34 @@ https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/jsx-no-
 ````md
 <Tabs>
     <TabList aria-label="List of tabs">
-      <Tab>One</Tab>
-      <Tab>Two</Tab>
-      <Tab>Three</Tab>
+      <Tab>Code</Tab>
+      <Tab>Callouts</Tab>
+      <Tab>Table</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>
-        Some code in a tab.
-
-        Notice how it's background uses the proper layer attribute.
-
+        Notice how it's background uses the proper layer attribute. This is automatic.
         ```ts
         const test = 'test';
         console.log(test);
         ```
       </TabPanel>
       <TabPanel>
-        **Some text** that is _styled_
+        > A blockquote with some `code`
+        <Danger text="With some text" />
+        <Warning>
+          And a **warning**
+        </Warning>
+        <QuizAlert/>
       </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>
+        Tables also account for layer depth.
+        | one | two |
+        | --- | --- |
+        | a   | b   |
+        | c   | d   |
+      </TabPanel>
     </TabPanels>
-
 </Tabs>
 ````
 
@@ -69,12 +76,11 @@ https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/jsx-no-
       <TabPanel>
         Tables also account for layer depth.
         | one | two |
-        |-----|-----|
+        | --- | --- |
         | a   | b   |
         | c   | d   |
       </TabPanel>
     </TabPanels>
-
 </Tabs>
 
 ## Tokenization Applet

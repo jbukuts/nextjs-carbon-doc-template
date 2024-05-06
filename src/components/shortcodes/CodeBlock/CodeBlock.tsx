@@ -4,7 +4,7 @@ import { IconButton as CopyButton } from '@carbon/react';
 import { Copy } from '@carbon/react/icons';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { useTranslations } from 'next-intl';
-import { Children, createElement, useRef } from 'react';
+import { createElement, useRef } from 'react';
 import styles from './CodeBlock.module.scss';
 import './highlight.scss';
 
@@ -15,7 +15,7 @@ const CODE_CLASS_REGEX = new RegExp(`^language-.*`, 'i');
 export default function CodeBlock(props: CodeBlockProps) {
   const { children, className } = props;
 
-  const isInline = Children.count(children) === 1;
+  const isInline = !className?.includes('hljs');
 
   const lang = className
     ?.split(' ')

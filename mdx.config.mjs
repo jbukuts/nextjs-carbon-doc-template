@@ -1,3 +1,6 @@
+import plaintext from 'highlight.js/lib/languages/plaintext';
+import xls from 'highlight.js/lib/languages/xl';
+import { common } from 'lowlight';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeSlug from 'rehype-slug';
@@ -54,7 +57,13 @@ const config = {
       [remarkSectionize]
     ],
     rehypePlugins: [
-      [rehypeHighlight, {}],
+      [
+        rehypeHighlight,
+        {
+          languages: { ...common, plaintext, xls },
+          aliases: { plaintext: ['txt'] }
+        }
+      ],
       [rehypeSlug, {}],
       [
         rehypeAutolinkHeadings,
