@@ -1,4 +1,4 @@
-import 'server-only';
+// import 'server-only';
 
 import dynamic from 'next/dynamic';
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
@@ -11,7 +11,9 @@ import {
   Tabs,
   TabPanel,
   TabPanels,
-  TabList
+  TabList,
+  Accordion,
+  AccordionItem
 } from '#/components/custom';
 import {
   TableHead,
@@ -81,7 +83,9 @@ const shortcodes: ComponentMap = {
   TabList,
   Tab,
   TabPanels,
-  TabPanel
+  TabPanel,
+  Accordion,
+  AccordionItem
 };
 
 export default shortcodes;

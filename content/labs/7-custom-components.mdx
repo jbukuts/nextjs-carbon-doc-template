@@ -12,10 +12,31 @@ In this document is a list of the custom components available for use within you
 
 All source code for these components can be found within `src/components/shortcodes`.
 
+## Accordion
+
+Built off of the `Accordion` components from `@carbon/react`. Some added logic exists to streamline its use.
+
+<Accordion>
+  <AccordionItem title='Code Test'>
+    Here is a code block within a accordion item:
+
+    ```py
+    test = "test %s"
+    print(test % "item")
+    ```
+
+  </AccordionItem>
+  <AccordionItem title='Callouts'>
+    Here is a code block within a accordion item:
+
+    > A basic `blockquote`
+
+  </AccordionItem>
+</Accordion>
+
 ## Tabs
 
 Built off the `Tabs` components from Carbon. Some built-in logic has been added to account for layers.
-https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/jsx-no-undef.md
 
 ````md
 <Tabs>

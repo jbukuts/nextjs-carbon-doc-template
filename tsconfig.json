@@ -24,7 +24,6 @@
       "#/*": ["./src/*"]
     }
   },
-  // "src/components/shortcodes/BlockQuote",
   "include": [
     "next-env.d.ts", 
     "**/*.ts", 
