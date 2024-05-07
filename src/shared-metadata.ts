@@ -2,6 +2,13 @@ import 'server-only';
 
 import merge from 'lodash/merge';
 import type { Metadata } from 'next';
+import siteConfig from '#site-config';
+
+const {
+  name: { title },
+  description,
+  image
+} = siteConfig;
 
 const {
   PORT = 3000,
@@ -11,38 +18,31 @@ const {
 } = process.env;
 const IS_DEV = NODE_ENV === 'development';
 
-const siteData = {
-  title: 'Carbon Next.js Template',
-  description:
-    'Documentation style site template for Next.js and Carbon Design',
-  image: '/rebus.jpg'
-};
-
 const baseMetadata: Metadata = {
   metadataBase: new URL(
     IS_DEV
       ? `http://localhost:${PORT}`
       : `https://${VERCEL_URL}${NEXT_PUBLIC_BASE_PATH}`
   ),
-  title: siteData.title,
-  description: siteData.description,
+  title: title,
+  description: description,
   alternates: {
     canonical: '/'
   },
   openGraph: {
     type: 'website',
-    siteName: siteData.title,
+    siteName: title,
     url: '/',
     locale: 'en_US',
-    description: siteData.description,
-    images: siteData.image
+    description: description,
+    images: image
   },
   twitter: {
     card: 'summary',
-    title: siteData.title,
-    description: siteData.description,
+    title: title,
+    description: description,
     creator: '@ibm',
-    images: siteData.image
+    images: image
   }
 };
 

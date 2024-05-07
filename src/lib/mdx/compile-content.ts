@@ -1,3 +1,5 @@
+import 'server-only';
+
 import path from 'path';
 import { compileMDX, MDXRemoteProps } from 'next-mdx-remote/rsc';
 import type { PluggableList } from 'unified';
@@ -5,6 +7,11 @@ import { remarkImage, remarkLocalizeLinks } from '#/lib/plugins/remark';
 import mdxConfig from '#mdx-config';
 import { SLUG_MAP, collectBreadcrumbs } from '../velite';
 import shortcodes from './shortcodes';
+import siteConfig from '#site-config';
+
+const { owner, repo } = siteConfig;
+
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 const {
   plugins: { remarkPlugins: defRemarkPlugins, rehypePlugins: defRehypePlugins }
@@ -60,7 +67,20 @@ export default async function compileContent(
         remarkPlugins: [
           ...defRemarkPlugins,
           ...remarkPlugins,
-          [remarkImage, { prepend: imagePath }],
+          [
+            remarkImage,
+            {
+              prepend: imagePath,
+              ...(IS_DEV
+                ? {}
+                : {
+                    git: {
+                      owner,
+                      repo
+                    }
+                  })
+            }
+          ],
           [remarkLocalizeLinks, { locale }]
         ],
         rehypePlugins: [...defRehypePlugins, ...rehypePlugins]

@@ -22,6 +22,11 @@ import SearchBar from './SearchBar';
 import SideNavTree from './SideNavTree';
 import ToggleThemeAction from './ToggleThemeAction';
 import styles from './UIShell.module.scss';
+import siteConfig from '#site-config';
+
+const {
+  name: { prefix, title }
+} = siteConfig;
 
 interface UIShellProps {
   children: ReactNode;
@@ -53,7 +58,7 @@ export default function UIShell(props: UIShellProps) {
           onClick={toggleSideBar}
           aria-expanded={showSideNav}
         />
-        <HeaderName prefix='Carbon'>Next.js Template</HeaderName>
+        <HeaderName prefix={prefix}>{title}</HeaderName>
         <HeaderGlobalBar>
           <SearchBar />
           <ToggleThemeAction />
