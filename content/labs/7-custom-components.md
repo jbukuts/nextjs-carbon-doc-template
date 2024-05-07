@@ -27,10 +27,18 @@ Built off of the `Accordion` components from `@carbon/react`. Some added logic e
 
   </AccordionItem>
   <AccordionItem title='Callouts'>
-    Here is a code block within a accordion item:
-
+    Here is how a `Callout` may display
     > A basic `blockquote`
 
+  </AccordionItem>
+  <AccordionItem title='NavTile'>
+    Testing how `NavTile` displays in an accordion component:
+    <TileGrid>
+      <NavTile to='/3-carbon' />
+      <NavTile to='/4-content-sourcing' />
+      <NavTile to='/5-content-loading' />
+      <NavTile to='/6-localization' />
+    </TileGrid>
   </AccordionItem>
 </Accordion>
 
@@ -73,35 +81,36 @@ Built off the `Tabs` components from Carbon. Some built-in logic has been added 
 ````
 
 <Tabs>
-    <TabList aria-label="List of tabs">
-      <Tab>Code</Tab>
-      <Tab>Callouts</Tab>
-      <Tab>Table</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>
-        Notice how it's background uses the proper layer attribute. This is automatic.
-        ```ts
-        const test = 'test';
-        console.log(test);
-        ```
-      </TabPanel>
-      <TabPanel>
-        > A blockquote with some `code`
-        <Danger text="With some text" />
-        <Warning>
-          And a **warning**
-        </Warning>
-        <QuizAlert/>
-      </TabPanel>
-      <TabPanel>
-        Tables also account for layer depth.
-        | one | two |
-        | --- | --- |
-        | a   | b   |
-        | c   | d   |
-      </TabPanel>
-    </TabPanels>
+  <TabList aria-label='List of tabs'>
+    <Tab>Code</Tab>
+    <Tab>Callouts</Tab>
+    <Tab>Table</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>
+      Notice how it's background uses the proper layer attribute. This is
+      automatic. 
+      ```ts 
+      const test = 'test'; 
+      console.log(test); 
+      ```
+    </TabPanel>
+    <TabPanel>
+      > A blockquote with some `code`
+      <Danger text='A danger item' />
+      <Warning>
+        And a **warning**
+      </Warning>
+      <QuizAlert />
+    </TabPanel>
+    <TabPanel>
+      Tables also account for layer depth.
+      | one | two |
+      | --- | --- |
+      | a   | b   |
+      | c   | d   |
+    </TabPanel>
+  </TabPanels>
 </Tabs>
 
 ## Tokenization Applet
