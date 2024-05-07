@@ -8,7 +8,7 @@ import type { collectBreadcrumbs } from '#/lib/velite';
 import CustomStack from '../Stack';
 import { ReadingTimeTag, UpdatedTag } from '../Tags';
 import { ContentLevelTag } from '../Tags/Tags';
-import ServerBreadCrumbs from './Breadcrumbs';
+import BreadCrumbs from './Breadcrumbs';
 import styles from './PageHeader.module.scss';
 
 interface HeaderProps extends React.ComponentProps<'header'> {
@@ -42,7 +42,7 @@ export default function Header(props: HeaderProps) {
           justify='space-between'
           align='flex-start'>
           {breadcrumbs.length > 0 ? (
-            <ServerBreadCrumbs breadcrumbs={breadcrumbs} />
+            <BreadCrumbs breadcrumbs={breadcrumbs} />
           ) : (
             <div></div>
           )}
