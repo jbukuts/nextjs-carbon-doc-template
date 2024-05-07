@@ -3,10 +3,6 @@
   & :global(.cds--dropdown) {
     border-bottom: 1px solid themes.$border-subtle-00;
     background-color: transparent;
-
-    &:hover {
-      background-color: themes.$field-hover-01;
-    }
   }
 
   @include resources.apply-lesser-than('md') {
