@@ -1,9 +1,13 @@
 'use client';
 
-import { Tab } from '@carbon/react';
+import { Tab as CarbonTab } from '@carbon/react';
+import { forwardRef } from 'react';
 
-type TabProps = React.ComponentProps<typeof Tab>;
+type TabProps = React.ComponentProps<typeof CarbonTab>;
 
-export default function CustomTab(props: TabProps) {
-  return <Tab {...props} />;
-}
+export default forwardRef<HTMLElement, TabProps>(function Tab(
+  props: TabProps,
+  ref
+) {
+  return <CarbonTab {...props} ref={ref} />;
+});

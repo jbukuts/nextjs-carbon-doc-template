@@ -64,8 +64,10 @@ export function ContentLevelTag(props: ContentLevelTagProps) {
 
   const type = LEVEL_MAP[level] || 'magenta';
   return (
-    <Tag {...rest} type={type} renderIcon={Apple}>
-      {level}
-    </Tag>
+    <Suspense fallback={null}>
+      <Tag {...rest} type={type} renderIcon={Apple}>
+        {level}
+      </Tag>
+    </Suspense>
   );
 }

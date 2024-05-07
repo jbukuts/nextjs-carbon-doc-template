@@ -5,9 +5,9 @@ import { compileMDX, MDXRemoteProps } from 'next-mdx-remote/rsc';
 import type { PluggableList } from 'unified';
 import { remarkImage, remarkLocalizeLinks } from '#/lib/plugins/remark';
 import mdxConfig from '#mdx-config';
+import siteConfig from '#site-config';
 import { SLUG_MAP, collectBreadcrumbs } from '../velite';
 import shortcodes from './shortcodes';
-import siteConfig from '#site-config';
 
 const { owner, repo } = siteConfig;
 

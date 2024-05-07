@@ -11,14 +11,13 @@ import styles from './SearchBar.module.scss';
 type SearchMap = Record<string, CustSearchResult[]>;
 
 export default function SearchBar() {
-  const { results, searchText, setSearchText } = useSearch();
+  const { results, setSearchText } = useSearch();
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const [resultsMap, setResultsMap] = useState<SearchMap>({});
 
   useEffect(() => {
-    console.log(results);
-
+    if (results.length === 0) return;
     const t = results.reduce((acc, curr) => {
       const { page } = curr;
       if (acc[page] === undefined) acc[page] = [];
@@ -63,7 +62,7 @@ export default function SearchBar() {
                   style={{ display: 'flex', flexDirection: 'column' }}>
                   <Link
                     onClick={() => setExpanded(false)}
-                    href={`/`}
+                    href={items[0].location.split('#')[0]}
                     key={`res-${idx}`}
                     className={styles.searchResult}>
                     <span className={styles.resultTitle}>
@@ -75,7 +74,7 @@ export default function SearchBar() {
                     return (
                       <Link
                         onClick={() => setExpanded(false)}
-                        href={`${r.location}:~:text=${encodeURI(searchText)}`}
+                        href={`${r.location}`}
                         key={r.id}
                         className={styles.searchResult}>
                         <span

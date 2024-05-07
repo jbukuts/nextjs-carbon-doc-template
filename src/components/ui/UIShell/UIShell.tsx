@@ -14,6 +14,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
 import { useState, type ReactNode } from 'react';
 import type { SlugTree } from '#/lib/velite/generate-tree';
+import siteConfig from '#site-config';
 import CustomSideNavItem from './CustomSideNavItem';
 import Footer from './Footer';
 import LangDropdown from './LangDropdown';
@@ -22,7 +23,6 @@ import SearchBar from './SearchBar';
 import SideNavTree from './SideNavTree';
 import ToggleThemeAction from './ToggleThemeAction';
 import styles from './UIShell.module.scss';
-import siteConfig from '#site-config';
 
 const {
   name: { prefix, title }
