@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -k -n \"velite,next\" -c \"green,blue\" \"npm:velite:watch\" \"next dev\"",
-    "build": "npm run velite && next build",
+    "dev": "npm run symlink:create && concurrently -k -n \"velite,next\" -c \"green,blue\" \"npm:velite:watch\" \"next dev\"",
+    "build": "npm run symlink:rm && npm run velite && next build",
     "start": "npm run build && npm run serve",
     "preview": "next start",
     "test": "vitest run",
@@ -12,7 +12,9 @@
     "lint:md": "eslint ./content --ext md,mdx",
     "serve": "serve out",
     "velite": "npx velite",
-    "velite:watch": "npx velite dev"
+    "velite:watch": "npx velite dev",
+    "symlink:create": "./bin/create_symlink.mjs",
+    "symlink:rm": "./bin/remove_symlink.mjs"
   },
   "dependencies": {
     "@carbon/react": "^1.52.0",

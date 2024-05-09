@@ -8,29 +8,6 @@ const { NEXT_PUBLIC_BASE_PATH } = process.env;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const withNextIntl = createNextIntlPlugin('./i18n.config.ts');
 
-// const SYMLINKS = ['content', 'fragments'];
-// const IS_DEV = process.env.NODE_ENV === 'development';
-
-// symlink logic
-// if (IS_DEV) {
-//   SYMLINKS.forEach((s) => {
-//     const target = path.join(__dirname, 'public', s);
-//     if (!fs.existsSync(target)) {
-//       console.log('creating symlink:', s);
-//       const source = path.join(__dirname, s);
-//       fs.symlinkSync(source, target, 'dir');
-//     }
-//   });
-// } else {
-//   SYMLINKS.forEach((s) => {
-//     const target = path.join(__dirname, 'public', s);
-//     if (fs.existsSync(target)) {
-//       console.log('removing symlink:', s);
-//       fs.unlinkSync(target);
-//     }
-//   });
-// }
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: NEXT_PUBLIC_BASE_PATH,

@@ -38,6 +38,5 @@ next-env.d.ts
 # velite
 /.velite
 
-
-/public/content/
-/public/fragments/
+# symlink
+public/content
