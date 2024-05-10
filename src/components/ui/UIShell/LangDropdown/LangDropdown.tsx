@@ -1,5 +1,8 @@
+import { breakpoints } from '@carbon/layout';
 import { Dropdown } from '@carbon/react';
 import { EarthFilled } from '@carbon/react/icons';
+// @ts-ignore
+import { useMatchMedia } from '@carbon/react/lib/internal/useMatchMedia';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import useSupportedLocales from '#/lib/hooks/useSupportedLocales';
@@ -11,6 +14,8 @@ interface LangDropdownProps {
   sideBarTree: SlugTree;
 }
 
+const mdMediaQuery = `(min-width: ${breakpoints.md.width})`;
+
 export default function LangDropdown(props: LangDropdownProps) {
   const { sideBarTree } = props;
 
@@ -18,6 +23,7 @@ export default function LangDropdown(props: LangDropdownProps) {
   const currentLocale = useLocale() || undefined;
   const supportedLocales = useSupportedLocales(sideBarTree);
   const router = useRouter();
+  const greaterThanMd = useMatchMedia(mdMediaQuery);
 
   return (
     supportedLocales.length > 0 &&
@@ -40,7 +46,11 @@ export default function LangDropdown(props: LangDropdownProps) {
         disabled={supportedLocales.length === 1}
         className={styles.selectLang}
         label={t('Header.localeSwitcher.label')}
-        itemToString={(i) => localeMap[i!.locale]}
+        itemToString={(i) =>
+          greaterThanMd
+            ? localeMap[i!.locale]
+            : localeMap[i!.locale].substring(0, 2).toUpperCase()
+        }
         id='locale-select'
         items={supportedLocales}
         size='lg'
