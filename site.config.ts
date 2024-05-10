@@ -1,7 +1,6 @@
 /**
  * Exports basic variable pertaining to site metadata
  */
-
 const config = {
   name: {
     prefix: 'Carbon',

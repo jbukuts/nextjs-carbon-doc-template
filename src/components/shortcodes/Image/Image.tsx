@@ -76,10 +76,11 @@ export default function Image(props: ImageProps) {
 
                 <TransformComponent
                   wrapperStyle={{ width: '100%', height: '100vh' }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <NextImage
                     src={src}
                     alt={alt}
+                    width={1000}
+                    height={1000}
                     onClick={open}
                     style={{
                       width: '100%',
@@ -94,7 +95,6 @@ export default function Image(props: ImageProps) {
         )}
       </dialog>
       <span className={styles.wrapper}>
-        {/* <img src={src} alt={alt} onClick={open} /> */}
         <NextImage
           alt={alt}
           src={src}
@@ -104,14 +104,5 @@ export default function Image(props: ImageProps) {
         />
       </span>
     </>
-    // <div className={styles.wrapper}>
-    //   <NextImage
-    //     alt={alt}
-    //     src={src}
-    //     fill
-    //     className={styles.image}
-    //     unoptimized
-    //   />
-    // </div>
   );
 }

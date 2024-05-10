@@ -26,3 +26,9 @@ To _"cheat"_ this limitation, when running a development instance of the server 
 Then when building out static assets this symlink is removed to decrease the size of the total assets. This is fine given the custom remark plugin `remark-img` that's used when compiling MDX will convert any relative image links to point to their absolute URL counterparts within the GitHub repository.
 
 Both the creation and deletion of the symlinks are instrumented as some simple Node scripts (`create_symlink.mjs` and `remove_symlink.mjs`) contained within the top-level `bin` folder. They are run as the first steps of `npm run dev` and `npm run build` respectively.
+
+<Warning>
+This implementation assumes that images in production will be served from a GitHub repository.
+
+If you use some other method be sure to remove the plugin from the MDX pipeline and implement your logic.
+</Warning>

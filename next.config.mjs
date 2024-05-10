@@ -13,9 +13,8 @@ const nextConfig = {
   basePath: NEXT_PUBLIC_BASE_PATH,
   output: 'export',
   images: {
-    // loader: 'custom',
-    // loaderFile: './src/lib/image-loader.ts',
-    unoptimized: true
+    loader: 'custom',
+    loaderFile: './src/lib/image-loader.ts'
   },
   webpack: (config) => {
     // for tokenization applet
@@ -23,9 +22,6 @@ const nextConfig = {
       ...config.resolve.alias,
       sharp$: false,
       'onnxruntime-node$': false
-      // manually do this
-      // https://github.com/amannn/next-intl/blob/78f88d1493eb796498b7fb2c986536ac49cffda0/packages/next-intl/src/plugin.tsx#L95
-      // 'next-intl/config': path.resolve(config.context, './src/i18n.ts')
     };
 
     return config;
