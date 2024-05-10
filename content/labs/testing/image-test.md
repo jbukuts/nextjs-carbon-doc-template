@@ -23,7 +23,9 @@ Images can be stored within the `content` directory like any other form of conte
 
 To _"cheat"_ this limitation, when running a development instance of the server a symlink is created within the `public` directory to point to the top-level content folder. This bridges the gap and allows relative paths to be used in the Markdown content.
 
-Then when building out static assets this symlink is removed to decrease the size of the total assets. This is fine given the custom remark plugin `remark-img` that's used when compiling MDX will convert any relative image links to point to their absolute URL counterparts within the GitHub repository.
+Then when building out static assets this symlink is removed to decrease the size of the total assets. This is fine as a custom image loader has also been added so that relative image links are transformed to point to their remote counterparts in the GitHub repository.
+
+> For more info on this check the `images` configuration in `next.config.mjs` as well as the loader logic itself in `./src/lib/image-loader.ts`.
 
 Both the creation and deletion of the symlinks are instrumented as some simple Node scripts (`create_symlink.mjs` and `remove_symlink.mjs`) contained within the top-level `bin` folder. They are run as the first steps of `npm run dev` and `npm run build` respectively.
 
