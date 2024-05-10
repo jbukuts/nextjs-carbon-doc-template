@@ -29,10 +29,10 @@ async function compileFragment(name: string, locale: string) {
 
   if (!item) return null;
 
-  const { raw, path: file_path } = item;
+  const { raw, file_path } = item;
 
   const { dir } = path.parse(file_path);
-  const imagePath = path.join('content', path.normalize(dir));
+  const imagePath = path.normalize(dir);
 
   const { content } = await compileMDX({
     source: raw,
