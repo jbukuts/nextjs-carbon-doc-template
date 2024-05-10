@@ -11,13 +11,13 @@ Content is originally stored as MDX files within the `content` directory at the 
 
 Our main use case for MDX over plain Markdown is the ability to drop custom components inline. This allows for interactive content to live alongside static markup.
 
-For more information on these custom components in action see the page on [Custom Components](/docs/custom-components). This page will primarily deal in the inner workings on the transformation from markup to HTML/JSX.
+For more information on these custom components in action see the page on [Custom Components](/docs/custom-components). This page will primarily deal with the inner workings of the transformation from markup to HTML/JSX.
 
 ## `@next/mdx` pitfall
 
-Though Vercel does have out-of-the-box support for MDX via `@next/mdx` this preloader forces content to live within the `app` directory and conform the filesystem routing [outlined](https://nextjs.org/docs/app/building-your-application/routing). This is rather restricting with a large amount of content like our site (and even more restricting if content is to be sourced remotely).
+Though Vercel does have out-of-the-box support for MDX via `@next/mdx` this preloader forces content to live within the `app` directory and conform the filesystem routing [outlined](https://nextjs.org/docs/app/building-your-application/routing). This is rather restricting with a large amount of content like our site (and even more restricting if the content is to be sourced remotely).
 
-For finer control `next-mdx-remote` was chosen due to its support for various customization features as well as the ability to directly compile raw MDX into a React element without the need for client providers.
+For finer control, `next-mdx-remote` was chosen due to its support for various customization features as well as the ability to directly compile raw MDX into a React element without the need for client providers.
 
 > This essentially means a large amount of the MDX will be transformed to simple HTML
 
@@ -44,9 +44,9 @@ This section will try and explain that process as well as how the various tools 
 
 ### Compilation and ASTs
 
-This process is most similar to a **compilation step** like how the C compiler takes code and generates an executable. The difference being our target is not an executabe binary but a different markup language (so essentially transpilation but the analogy holds).
+This process is most similar to a **compilation step** like how the C compiler takes code and generates an executable. The difference being our target is not an executable binary but a different markup language (so essentially transpilation but the analogy holds).
 
-The most popular tooling that exist for this situation is called `remark` (for Markdown) and `rehype` (for HTML). Both of which are designed to be used by `unified` (an ecosystem designed around transforming content).
+The most popular tooling that exists for this situation is called `remark` (for Markdown) and `rehype` (for HTML). Both of which are designed to be used by `unified` (ecosystem designed around transforming content).
 
 These tools are designed to handle the syntax trees that can represent their respective content. The main two we care about are:
 
@@ -71,7 +71,7 @@ It gets a bit more complex as MDX extends both MDAST and HAST through MDXAST and
 
 ### Plugins
 
-In this pipeline we are able to intereact with the syntax trees representing Markdown and HTML. This is available via **plugins**. These **plugins** are functions that are passed the entirey of the syntax tree with which they can do whatever they please.
+In this pipeline, we can interact with the syntax trees representing Markdown and HTML. This is available via **plugins**. These **plugins** are functions that are passed the entirety of the syntax tree with which they can do whatever they please.
 
 > So long as the resulting syntax tree from a plugin is still a valid AST
 
@@ -89,11 +89,13 @@ But there are [many](https://github.com/remarkjs/remark/blob/main/doc/plugins.md
 
 ### Custom transformation plugins
 
-Some custom plugins have also been created to account for some of edge cases and are listed below. All of them are exported from `src/lib/plugins` within the project.
+Some custom plugins have also been created to account for some of edge cases and are listed below. All of them are exported from `src/lib/plugins` directory within the project.
 
-### `remark-image`
+### `remark-img`
 
-Given our images currently live next to our content we need some way of transforming the relative links we use when writing content into links that can be properly understood as static assets. This plugin does just that.
+Given our images currently live next to our content we need some way of transforming the relative links we use when writing content into links that can be properly understood as static assets. This plugin does just that. It can also act to reference remote URLs within the GitHub repository when configured to do so.
+
+It is applied during the MDX compilation step in `src/lib/mdx/compile-content.ts`.
 
 <Warning>
 **It only acts on images with relative source values**
@@ -101,7 +103,9 @@ Given our images currently live next to our content we need some way of transfor
 
 ### `remark-localize-links`
 
-When writing relative links within our markup it makes more sense to write them with respect to the filesystem they originate from. Thus they do not have their locale prefixed to them like the resulting static pages do. This plugin will transform any relative links within your content to be localized based on as a locale of the generated page.
+When writing relative links within our markup it makes more sense to write them with respect to the filesystem they originate from. Thus they do not have their locale prefixed to them like the resulting static pages do. This plugin will transform any relative links within your content to be localized based on the locale of the generated page.
+
+It is applied during the MDX compilation step in `src/lib/mdx/compile-content.ts`.
 
 <Warning>
 It will **only** transform relative links
@@ -109,7 +113,7 @@ It will **only** transform relative links
 
 #### Helper utilities
 
-Various heler utilities exist within the `unist` ecosystem to help solve common problems when parsing an AST. For instance within this repo we use:
+Various helper utilities exist within the `unist` ecosystem to help solve common problems when parsing an AST. For instance, within this repo, we use:
 
 - `unist-util-visit`: helps to walk an AST
 - `unist-util-select`: query for specific nodes in the tree
@@ -121,6 +125,8 @@ When writing any custom plugin these utilities become invaluable assets as they 
 ## Images
 
 Images are handled differently in the development and production environments.
+
+For more information on use and implementation read [here](/testing/image-test)
 
 ### Local Development
 
@@ -134,7 +140,7 @@ For more info on the inner workings of this see `src/lib/plugins/remark-image` w
 
 In a production build images are sourced **remotely**.
 
-Since our site is hosted as static assets within Github Pages it would be redundant to have them included in the final build assets. Because of this, when a produciton version of the site is built all relative image links will have their paths transformed point to the content hosted in the `main` repo on public GitHub.
+Since our site is hosted as static assets within Github Pages it would be redundant to have them included in the final build assets. Because of this, when a production version of the site is built all relative image links will have their paths transformed point to the content hosted in the `main` repo on public GitHub.
 
 <Danger>
 If you make a production build of the site locally and cannot see your images that is because they are not yet within the `main` branch of the repo. Instead, to test a static build with local assets run `npm run build:local`.

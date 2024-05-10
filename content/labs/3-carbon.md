@@ -21,25 +21,25 @@ Below we'll explore how each module can be accessed.
 
 ## Accessing theme tokens
 
-Themed color tokens are accessible via the `themes` namespace through the `@carbon/theme` module. These tokens are powerful as they allow for colors to be applied that are **theme neutral**. This makes styling new elements easy as they will conform to both Light and Dark themes out-of-the-box and are the preferred way to specify all color attributes for elements.
+Themed color tokens are accessible via the `themes` namespace through the `@carbon/theme` module. These tokens are powerful as they allow for colors to be applied that are **theme-neutral**. This makes styling new elements easy as they will conform to both Light and Dark themes out-of-the-box and is the preferred way to specify all color attributes for elements.
 
-In order to get a specific color simply used `theme.$[token-name]` like so:
+To get a specific color simply use `theme.$[token-name]` like so:
 
 ```scss
 $color: themes.$layout-02;
 ```
 
-For getting a single color this is the easiest and best approach. However, in more complicated scenarios where you may need to change the opacity or interpolate the token name with a string there is a seperate approach.
+For getting a single color this is the easiest and best approach. However, in more complicated scenarios where you may need to change the opacity or interpolate the token name with a string, there is a separate approach.
 
 ### Caveats
 
-The `theme.$[token-name]` method is not the only way to get a token. There exist a function within Carbon called `themes.get($token)`. This function, however, does not return theme agnostic tokens and instead returns static tokens relative to module's configured theme. Because of this it has been hidden and is not accessible via the `themes` namespace.
+The `theme.$[token-name]` method is not the only way to get a token. There exists a function within Carbon called `themes.get($token)`. This function, however, does not return theme-agnostic tokens and instead returns static tokens relative to the module's configured theme. Because of this it has been hidden and is not accessible via the `themes` namespace.
 
 Instead, a new function has been appended to the namespace called `theme.get-token($token, $opacity)`.
 
 This function is useful when you need to use a string to access a token (for instance when interpolating a value). It is built off of some the internal functions within the module as well and will error when a token that does not exist is referenced.
 
-It also allows for you to specify an optional desired `$opacity` value. This is needed as the function is designed to return a CSS variable and augmenting the opacity of such can be awkward. Under the hood it applies `color-mix` to the token.
+It also allows you to specify an optional desired `$opacity` value. This is needed as the function is designed to return a CSS variable and augmenting the opacity of such can be awkward. Under the hood, it applies `color-mix` to the token.
 
 Let's take a look at the function in action:
 
@@ -58,7 +58,7 @@ $color: themes.get_token('layer-#{$some}', 0.5);
 
 If you need access to a specific color within Carbon these are available via the `colors` namespace through `@carbon/colors`.
 
-For example say you needed a specific blue value for some text:
+For example, say you needed a specific blue value for some text:
 
 ```scss
 .element {
@@ -66,7 +66,7 @@ For example say you needed a specific blue value for some text:
 }
 ```
 
-Or you wanted the background of that element to be a lighter blue
+Or if you wanted the background of that element to be a lighter blue
 
 ```scss
 $color: blue;
@@ -106,7 +106,7 @@ For instance, if you wanted to define the padding of a component:
 
 Items related to typography are exported via the `type` namespace and provided via `@carbon/type`. This includes various tokens, functions, and mixins related to font styling.
 
-For instance if you wanted to style a piece a text:
+For instance, if you wanted to style a piece of text:
 
 ```scss
 .element {
@@ -163,4 +163,4 @@ For instance, one of the exported mixins useful for styling at various screen si
 
 Carbon works by applying theming based on the existence of specific classes. Carbon exports a `Theme` component but in reality that's only a wrapper that applies a specific class.
 
-Theme switch is implmented via `next-themes` and will append the needed class to the body element of the page. It is also automatically configured to remember theme selection and, on first visit, default to the system theme.
+Theme switch is implemented via `next-themes`` and will append the needed class to the body element of the page. It is also automatically configured to remember theme selection and, on the first visit, default to the system theme.

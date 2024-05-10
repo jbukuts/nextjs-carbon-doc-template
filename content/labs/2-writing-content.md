@@ -7,7 +7,7 @@ desc: How to write content in MDX as well as some tips and tricks when thinking 
 
 # Writing Content
 
-As stated elsewhere, the content for this site is written in MDX. This is a superset of Markdown syntax. Specifically
+As stated elsewhere, the content for this site is written in MDX. This is a superset of Markdown syntax. Specifically it allows for the inlining of JSX within otherwise static Markdown.
 
 If you are new to Markdown I reccomend reading GitHub's [documentation on the matter](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
@@ -30,12 +30,14 @@ Of course there are other editors. But if you do choose to use a different one I
 
 Contained within each MDX file you might see it prefixed with a small amount of YAML. This is called **frontmatter data** and is utilized later down the line in various ways. Currently supported values within the `content` folder include:
 
-| Name      | Type      | Description                                             |
-| --------- | --------- | ------------------------------------------------------- |
-| `title`   | `string`  | Used as title with side navigation                      |
-| `updated` | `date`    | Date last updated. Sourced in page headers              |
-| `toc`     | `boolean` | Whether to render table of contents for page            |
-| `level`   | `string`  | Tags a page with level item in the header when rendered |
+| Name             | Type      | Description                                             |
+| ---------------- | --------- | ------------------------------------------------------- |
+| `title`          | `string`  | Used as title with side navigation                      |
+| `desc`           | `string`  | Short description of page                               |
+| `updated`        | `date`    | Date last updated. Sourced in page headers              |
+| `toc`            | `boolean` | Whether to render table of contents for page            |
+| `level`          | `string`  | Tags a page with level item in the header when rendered |
+| `timeToComplete` | `number`  | Time needed to complete page                            |
 
 > All of these fields **_are optional_**.
 
@@ -66,7 +68,7 @@ eslint ./specific/file.md
 
 Our content is written to support both English and Spanish translations. In order to ease some problems that might arise our site is designed to have different locales for the same content live next to each other within the projects file system.
 
-As such when the actual site pages are built they are always prefixed with a locale.
+As such, when the actual site pages are built they are always prefixed with a locale.
 
 ### Filename conventions
 
@@ -85,11 +87,15 @@ Because of how locales are parsed from the filename **DO NOT** use periods (`.`)
 
 ### Relative URLs
 
-Given we automate the translation of our content having to manually change the locales of relative links would be quite tedious. In order to remedy this relative links should instead be agnostic to the locale.
+Given translation of content can be automated having to manually change the locales of relative links would be quite tedious. In order to remedy this relative links should instead be agnostic to the locale.
 
 For instance, if you want to specify a relative link to `/en/docs/writing-content` instead use `/docs/writing-content` as your link. Then when the actual page is built this link will then be prepended with whatever the locale of the original file was.
 
 If the file name the relative link was in was `writing-content.md` the link would become `/en/docs/writing-content`. If the file name was instead `writing-content.es.md` then the link would become `/es/docs/writing-content`.
+
+<Danger>
+Any relative link **must be referenced from the site's root**. This is a current limitation.
+</Danger>
 
 Here's a small table illustrating the concept:
 

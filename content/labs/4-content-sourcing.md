@@ -2,14 +2,14 @@
 title: Content Data Layer
 updated: 2024-03-14
 timeToComplete: 10
-desc: How a data layer is created between the site code and the content itself. This allows for a more predictible and type-safe DX.
+desc: How a data layer is created between the site code and the content itself. This allows for a more predictable and type-safe DX.
 ---
 
 # Content Sourcing
 
-This page will deal on how the data layer between our content and Next.js is created.
+This page will deal with how the data layer between our content and Next.js is created.
 
-All page content for the site is sourced from within the `content` directory at the root level of the repository. In order for this large amount of content to be sourced within Next.js in a type-safe and easy-to-consume manner we've opted to make use of a tool called [Velite](https://velite.js.org/).
+All page content for the site is sourced from within the `content` directory at the root level of the repository. For this large amount of content to be sourced within Next.js in a type-safe and easy-to-consume manner we've opted to make use of a tool called [Velite](https://velite.js.org/).
 
 Velite helps to bridge the gap between our content and site code by allowing us to define a schema that our content follows. This means that when it is ingested within the site code typing will be provided based on the schema provided. Here's a high-level diagram of the process provided by Velite:
 
@@ -19,9 +19,7 @@ To see the definition of the schema take a look at `velite.config.js` at the pro
 
 Velite works by taking content from the defined sources in the config file and generating a manifest within the `.velite` directory for each of the collections we define.
 
-> As a note. This directory will only exist locally on your machine. It is included within the `.gitignore` and is regenerated as changes to the content within the collection are made.
-
-Under the hood this directory is both created and updated when you run either `npm run dev` or `npm run build`.
+Under the hood, this directory is both created and updated when you run either `npm run dev` or `npm run build`.
 
 If you want to manually update it you can run:
 
@@ -33,17 +31,17 @@ npm run velite
 npm run velite:watch
 ```
 
-This tool is also extremely useful when developing as due to the content manifests being continually updated as content is changed this means that HMR is supported implicitly.
+This tool is also extremely useful when developing due to the content manifests being continually updated as content is changed which means that HMR is supported implicitly.
 
 So as you write content locally the site page will update automatically when running the development server.
 
 ## How page URLs are generated
 
-During this sourcing phase the actual site URLs are generated as well and appended as part of the manifest. They are based off of the original file paths of the MDX content.
+During this sourcing phase, the actual site URLs are generated as well and appended as part of the manifest. They are based on the original file paths of the MDX content.
 
 These URL slugs are generated in the `transform` function in the Velite config.
 
-Here's are some examples:
+Here are some examples:
 
 | Original file path                    | Result page path        |
 | ------------------------------------- | ----------------------- |
@@ -55,9 +53,9 @@ Here's are some examples:
 
 ### Localization
 
-By default our content is assumed to be in English with a locale of `en` (as seen in the table above).
+By default, our content is assumed to be in English with a locale of `en` (as seen in the table above).
 
-However, we also want support for spanish translations as well. And, since most of the time localized content will reference the same images it makes sense to have the Markdown files live next to each in the file system. As such, in order to specify the locale for a page name the file as such:
+However, we also want support for Spanish translations as well. And, since most of the time localized content will reference the same images it makes sense to have the Markdown files live next to each other in the file system. As such, in order to specify the locale for a page name the file as such:
 
 `[page-name].[locale].md`
 
@@ -72,5 +70,5 @@ Here are some examples:
 <Danger>
 As a note. When naming files refrain from using periods (`.`) outside of specifying the locale.
 
-Currently, a file name like `test.file.md` would have it's locale parsed as `file`. Which is wrong.
+Currently, a file name like `test.file.md` would have its locale parsed as `file`. Which is wrong.
 </Danger>

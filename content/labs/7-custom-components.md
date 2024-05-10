@@ -18,7 +18,7 @@ Built off of the `Accordion` components from `@carbon/react`. Some added logic e
 
 <Accordion>
   <AccordionItem title='Code Test'>
-    Here is a code block within a accordion item:
+    Here is a code block within an accordion item:
 
     ```py
     test = "test %s"
@@ -88,7 +88,7 @@ Built off the `Tabs` components from Carbon. Some built-in logic has been added 
   </TabList>
   <TabPanels>
     <TabPanel>
-      Notice how it's background uses the proper layer attribute. This is
+      Notice how its background uses the proper layer attribute. This is
       automatic. 
       ```ts 
       const test = 'test'; 
@@ -99,7 +99,7 @@ Built off the `Tabs` components from Carbon. Some built-in logic has been added 
       > A blockquote with some `code`
       <Danger text='A danger item' />
       <Warning>
-        And a **warning**
+        And an **warning**
       </Warning>
       <QuizAlert />
     </TabPanel>
@@ -197,7 +197,9 @@ For this lab you will be acting as a System Administrator
 </Persona>
 ```
 
-<Persona>For this lab you will be acting as a System Administrator</Persona>
+<Persona>
+For this lab, you will be acting as a System Administrator
+</Persona>
 
 ### Generic
 
@@ -207,7 +209,9 @@ A generic callout
 </Callout>
 ```
 
-<Callout>A generic callout</Callout>
+<Callout>
+A generic callout
+</Callout>
 
 ### Blockquote
 
